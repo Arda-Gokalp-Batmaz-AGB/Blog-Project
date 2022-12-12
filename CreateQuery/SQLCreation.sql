@@ -49,5 +49,66 @@ CREATE TABLE "Blog"."Category"
 	"Title" VARCHAR(70),
 	PRIMARY KEY ("Title")
 );
+CREATE TABLE "Blog"."Tag"
+(
+	"ID" SERIAL,
+	"Name" VARCHAR(70),
+	PRIMARY KEY("ID"),
+	UNIQUE ("Name")
+);
+
+CREATE TABLE "Blog"."Comment"
+(
+	"ID" SERIAL,
+	"Text" TEXT NOT NULL,
+	"CreateDate" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"UpdateDate" TIMESTAMP NOT NULL,
+	"PostID" INTEGER NOT NULL,
+	"ParentID" INTEGER NOT NULL,
+	"AuthorID" INTEGER NOT NULL,
+	FOREIGN KEY("PostID") REFERENCES "Blog"."Post" ("ID"),
+	FOREIGN KEY("ParentID") REFERENCES "Blog"."Comment" ("ID"),
+	FOREIGN KEY("AuthorID") REFERENCES "Blog"."User" ("ID"),
+	PRIMARY KEY("ID")
+);
+
+CREATE TABLE "Blog"."Post_Category"
+(
+	"PostID" INTEGER,
+	"Category" VARCHAR(70),
+	PRIMARY KEY("PostID","Category"),
+	FOREIGN KEY("PostID") REFERENCES "Blog"."Post" ("ID"),
+	FOREIGN KEY("Category") REFERENCES "Blog"."Category" ("Title")
+);
+
+CREATE TABLE "Blog"."Comment_Tag"
+(
+	"CommentID" INTEGER,
+	"TagID" INTEGER,
+	PRIMARY KEY("CommentID","TagID"),
+	FOREIGN KEY("CommentID") REFERENCES "Blog"."Comment"("ID"),
+	FOREIGN KEY("TagID") REFERENCES "Blog"."Tag"("ID")
+);
+
+CREATE TABLE "Blog"."Bookmark"
+(
+	"UserID" INTEGER,
+	"PostID" INTEGER,
+	"Date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("UserID","PostID"),
+	FOREIGN KEY("UserID") REFERENCES "Blog"."User"("ID"),
+	FOREIGN KEY("PostID") REFERENCES "Blog"."Post"("ID")
+);
+
+CREATE TABLE "Blog"."Interact"
+(
+	"CommentID" INTEGER,
+	"UserID" INTEGER,
+	"Type" VARCHAR(10) NOT NULL,
+	"Date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("CommentID","UserID"),
+	FOREIGN KEY("CommentID") REFERENCES "Blog"."Comment"("ID"),
+	FOREIGN KEY("UserID") REFERENCES "Blog"."User"("ID")
+);
 ALTER TABLE IF EXISTS "Blog"."User"
     OWNER to postgres;
