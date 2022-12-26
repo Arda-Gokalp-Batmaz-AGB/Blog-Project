@@ -1,6 +1,6 @@
 # Blog-Project
  
 # ER Diagram
-![ER_Diagram](Diagrams_and_Schemas/ER-Diagram.png)
+![ER_Diagram](Database/Diagrams_and_Schemas/ER-Diagram.png)
 # Schema
-![Schema](Diagrams_and_Schemas/Schema.png)
+![Schema](Database/Diagrams_and_Schemas/Schema.png)
