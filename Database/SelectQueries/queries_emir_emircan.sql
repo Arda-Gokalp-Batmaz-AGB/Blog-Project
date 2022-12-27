@@ -9,6 +9,7 @@
 --  	Some intermediate examples 	- 9 examples written.
 --  	TOTAL						- 30 examples written.
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- To list the posts owned by a user.
 SELECT * FROM Post WHERE UserId = '<user_id>';
 -- To list the comments of a post.
@@ -21,6 +22,7 @@ SELECT * FROM Post ORDER BY Likes + Comments + Shares DESC LIMIT 10;
 SELECT * FROM Comment WHERE UserId = '<user_id>';
 -- To list the users blocked by a user.
 SELECT BlockedID FROM Block WHERE BlockerID = '<user_id>';
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- To list the top 10 posts with the most interaction and that were created within the last week.
 SELECT * FROM Post
 WHERE DateCreated BETWEEN NOW() - INTERVAL '7' DAY AND NOW()
@@ -42,6 +44,7 @@ WHERE l.UserId IS NULL AND c.PostId = '<post_id>';
 SELECT b.BlockedId FROM Block b
 GROUP BY b.BlockedId
 HAVING COUNT(b.BlockerId) >= 3;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- To list the users who have commented on a post, along with their comments and the number of likes on each comment.
 SELECT u.*, c.*, COUNT(l.Id) AS Likes FROM User u
 JOIN Comment c ON c.UserId = u.Id
@@ -75,6 +78,7 @@ JOIN Comment c ON c.PostId = p.Id
 WHERE p.UserId = '<user_id>'
 GROUP BY l.UserId
 HAVING COUNT(DISTINCT c.PostId) > 0;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- To list the top 5 users who have created the most posts in the past month.
 SELECT u.Id, u.Username, COUNT(p.Id) AS NumPosts FROM User u
 JOIN Post p ON p.UserId = u.Id
@@ -106,6 +110,7 @@ JOIN Block b ON b.BlockedId = u.Id
 WHERE b.Date BETWEEN NOW() - INTERVAL '1' MINUTE AND NOW()
 GROUP BY u.Id, u.Username
 ORDER BY NumBlocked DESC;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- To list the users who have commented on a post.
 SELECT u.* FROM User u
 JOIN Comment c ON c.UserId = u.Id
@@ -132,3 +137,4 @@ SELECT * FROM Like WHERE PostId = '<post_id>';
 SELECT * FROM Follow WHERE FollowerId = '<user_id>' OR FollowedId = '<user_id>';
 -- To list the blocks involving a user.
 SELECT * FROM Block WHERE BlockerId = '<user_id>' OR BlockedId = '<user_id>';
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
