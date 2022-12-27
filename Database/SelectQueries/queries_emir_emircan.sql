@@ -8,7 +8,7 @@
 --  	Some real-life examples 	- 5 examples written.
 --  	Some intermediate examples 	- 9 examples written.
 --  	TOTAL						- 30 examples written.
-
+-- FINAL COMMIT - 30 examples written.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- To list the posts owned by a user.
 SELECT * FROM Post WHERE UserId = '<user_id>';
