@@ -106,3 +106,29 @@ JOIN Block b ON b.BlockedId = u.Id
 WHERE b.Date BETWEEN NOW() - INTERVAL '1' MINUTE AND NOW()
 GROUP BY u.Id, u.Username
 ORDER BY NumBlocked DESC;
+-- To list the users who have commented on a post.
+SELECT u.* FROM User u
+JOIN Comment c ON c.UserId = u.Id
+WHERE c.PostId = '<post_id>';
+-- To list the users who have followed a user.
+SELECT u.* FROM User u
+JOIN Follow f ON f.FollowedId = u.Id
+WHERE f.FollowerId = '<user_id>';
+-- To list the users who have liked a post.
+SELECT u.* FROM User u
+JOIN Like l ON l.UserId = u.Id
+WHERE l.PostId = '<post_id>';
+-- To list the users who have been blocked by a user.
+SELECT u.* FROM User u
+JOIN Block b ON b.BlockedId = u.Id
+WHERE b.BlockerId = '<user_id>';
+-- To list the comments on a post.
+SELECT * FROM Comment WHERE PostId = '<post_id>';
+-- To list the posts created by a user.
+SELECT * FROM Post WHERE UserId = '<user_id>';
+-- To list the likes on a post.
+SELECT * FROM Like WHERE PostId = '<post_id>';
+-- To list the follows involving a user.
+SELECT * FROM Follow WHERE FollowerId = '<user_id>' OR FollowedId = '<user_id>';
+-- To list the blocks involving a user.
+SELECT * FROM Block WHERE BlockerId = '<user_id>' OR BlockedId = '<user_id>';
