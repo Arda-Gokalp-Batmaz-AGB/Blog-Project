@@ -1,0 +1,15 @@
+<p>user-profile works!</p>
+<div
+  [hidden]="profileLoaded"
+  class="spinner-border"
+  role="status"
+  >
+  <span class="visually-hidden">Loading...</span>
+</div>
+<p *ngIf="!showError && profileLoaded">
+  User Name : {{user?.userName}},
+  User Email : {{user?.email}}
+</p>
+<div *ngFor="let err of responseErrors">
+  <div>{{ err }}</div>
+</div>
