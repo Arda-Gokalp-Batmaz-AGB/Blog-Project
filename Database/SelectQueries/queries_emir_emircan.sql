@@ -1,0 +1,10 @@
+-- Contact: Emir Cetin MEMIS & Emircan YAPRAK
+-- Date: 12/27/2022
+-- Note: The following queries that starts with "!!!" should be checked and fixed if needed. We are sure they should work, but not 100%.
+-- Structure :
+--		Arda's recommendations 		- 6 examples written.
+--  	Some good examples 			- 5 examples written.
+--  	Some complex examples 		- 5 examples written.
+--  	Some real-life examples 	- 5 examples written.
+--  	Some intermediate examples 	- 9 examples written.
+--  	TOTAL						- 30 examples written.
