@@ -42,3 +42,36 @@ WHERE l.UserId IS NULL AND c.PostId = '<post_id>';
 SELECT b.BlockedId FROM Block b
 GROUP BY b.BlockedId
 HAVING COUNT(b.BlockerId) >= 3;
+-- To list the users who have commented on a post, along with their comments and the number of likes on each comment.
+SELECT u.*, c.*, COUNT(l.Id) AS Likes FROM User u
+JOIN Comment c ON c.UserId = u.Id
+LEFT JOIN Like l ON l.CommentId = c.Id
+WHERE c.PostId = '<post_id>'
+GROUP BY u.Id, c.Id
+ORDER BY c.DateCreated ASC;
+-- !!! To list the users who have followed a user, along with the number of posts and followers they have.
+SELECT u.*, COUNT(p.Id) AS NumPosts, COUNT(f.Id) AS NumFollowers FROM User u
+JOIN Follow f ON f.FollowedId = u.Id
+LEFT JOIN Post p ON p.UserId = u.Id
+WHERE f.FollowerId = '<user_id>'
+GROUP BY u.Id;
+-- To list the users who have commented on a post and also liked at least one of the comments on the post.
+SELECT u.* FROM User u
+JOIN Comment c ON c.UserId = u.Id
+JOIN Like l ON l.CommentId = c.Id
+WHERE c.PostId = '<post_id>'
+GROUP BY u.Id
+HAVING COUNT(DISTINCT l.Id) > 0;
+-- !!! To list the users who have not been followed by a user, along with the number of posts they have created and the number of users they are following.
+SELECT u.*, COUNT(p.Id) AS NumPosts, COUNT(f.Id) AS NumFollowed FROM User u
+LEFT JOIN Follow f ON f.FollowedId = u.Id
+LEFT JOIN Post p ON p.UserId = u.Id
+WHERE u.Id NOT IN (SELECT FollowedId FROM Follow WHERE FollowerId = '<user_id>')
+GROUP BY u.Id;
+-- !!! To list the users who have liked a post and also commented on at least one of the other posts created by the user who created the original post.
+SELECT l.UserId FROM Like l
+JOIN Post p ON p.Id = l.PostId
+JOIN Comment c ON c.PostId = p.Id
+WHERE p.UserId = '<user_id>'
+GROUP BY l.UserId
+HAVING COUNT(DISTINCT c.PostId) > 0;
