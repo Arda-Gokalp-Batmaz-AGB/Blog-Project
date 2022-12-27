@@ -75,3 +75,34 @@ JOIN Comment c ON c.PostId = p.Id
 WHERE p.UserId = '<user_id>'
 GROUP BY l.UserId
 HAVING COUNT(DISTINCT c.PostId) > 0;
+-- To list the top 5 users who have created the most posts in the past month.
+SELECT u.Id, u.Username, COUNT(p.Id) AS NumPosts FROM User u
+JOIN Post p ON p.UserId = u.Id
+WHERE p.DateCreated BETWEEN NOW() - INTERVAL '1' MONTH AND NOW()
+GROUP BY u.Id, u.Username
+ORDER BY NumPosts DESC
+LIMIT 5;
+-- To list the users who have commented on a post in the past week, along with the number of comments they have made.
+SELECT u.Id, u.Username, COUNT(c.Id) AS NumComments FROM User u
+JOIN Comment c ON c.UserId = u.Id
+WHERE c.DateCreated BETWEEN NOW() - INTERVAL '7' DAY AND NOW()
+GROUP BY u.Id, u.Username
+ORDER BY NumComments DESC;
+-- To list the users who have followed a user in the past day, along with the number of followers they have.
+SELECT u.Id, u.Username, COUNT(f.Id) AS NumFollowers FROM User u
+JOIN Follow f ON f.FollowedId = u.Id
+WHERE f.Date BETWEEN NOW() - INTERVAL '1' DAY AND NOW()
+GROUP BY u.Id, u.Username
+ORDER BY NumFollowers DESC;
+-- To list the users who have liked a post in the past hour, along with the number of likes they have given to other posts.
+SELECT u.Id, u.Username, COUNT(l.Id) AS NumLikes FROM User u
+JOIN Like l ON l.UserId = u.Id
+WHERE l.Date BETWEEN NOW() - INTERVAL '1' HOUR AND NOW()
+GROUP BY u.Id, u.Username
+ORDER BY NumLikes DESC;
+-- To list the users who have been blocked by a user in the past minute, along with the number of users they have blocked.
+SELECT u.Id, u.Username, COUNT(b.Id) AS NumBlocked FROM User u
+JOIN Block b ON b.BlockedId = u.Id
+WHERE b.Date BETWEEN NOW() - INTERVAL '1' MINUTE AND NOW()
+GROUP BY u.Id, u.Username
+ORDER BY NumBlocked DESC;
