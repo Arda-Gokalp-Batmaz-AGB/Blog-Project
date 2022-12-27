@@ -13,6 +13,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
 import { ErrorCatchingInterceptor } from './interceptors/ErrorCatchingInterceptor';
 import { GlobalErrorHandler } from './handlers/GlobalErrorHandler';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { GlobalErrorHandler } from './handlers/GlobalErrorHandler';
     HomeComponent,
     UserManagementComponent,
     UserProfileComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
