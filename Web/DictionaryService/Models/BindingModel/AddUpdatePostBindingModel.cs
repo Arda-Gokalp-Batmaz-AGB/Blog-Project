@@ -5,6 +5,8 @@ namespace DictionaryService.Models.BindingModel
     public class AddUpdatePostBindingModel
     {
         [Required]
+        public string AuthorID { get; set; }
+        [Required]
         public string Title{ get; set; }
         [Required]
         public Comment FirstComment { get; set; }

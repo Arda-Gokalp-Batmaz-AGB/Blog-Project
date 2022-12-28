@@ -17,6 +17,6 @@ namespace DictionaryService.Models.DTO
 
         public string? AuthorID { get; set; }
 
-        public List<Comment> comments
+        public List<CommentDTO> comments { get; set; }
     }
 }
