@@ -15,13 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Data\Repositories\" />
     <Folder Include="Helpers\" />
     <Folder Include="Models\Attributes\" />
-    <Folder Include="Models\BindingModel\" />
-    <Folder Include="Models\DTO\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

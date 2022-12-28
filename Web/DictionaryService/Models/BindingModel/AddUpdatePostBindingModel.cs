@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DictionaryService.Data.Entities;
+using System.ComponentModel.DataAnnotations;
 namespace DictionaryService.Models.BindingModel
 {
     public class AddUpdatePostBindingModel
@@ -6,6 +7,6 @@ namespace DictionaryService.Models.BindingModel
         [Required]
         public string Title{ get; set; }
         [Required]
-        public string FirstComment { get; set; }
+        public Comment FirstComment { get; set; }
     }
 }
