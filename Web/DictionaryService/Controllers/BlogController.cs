@@ -9,6 +9,7 @@ using DictionaryService.Services;
 using DictionaryService.Data.Repositories;
 using DictionaryService.Models.BindingModel;
 using AuthorizationService.Helpers;
+using DictionaryService.Models.DTO;
 
 namespace AuthorizationService.Controllers
 {
@@ -33,6 +34,12 @@ namespace AuthorizationService.Controllers
             }
 
             return await Task.FromResult(BadRequest());
+        }
+        [HttpGet("Posts")]
+        public async Task<ActionResult<IEnumerable<PostDTO>>> GetAllUsers()
+        {
+            var posts = _service.ListPosts();
+            return await Task.FromResult(Ok(posts));
         }
     }
 }

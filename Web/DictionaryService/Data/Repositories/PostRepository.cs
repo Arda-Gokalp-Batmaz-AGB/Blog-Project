@@ -54,9 +54,39 @@ namespace DictionaryService.Data.Repositories
             }
         }
 
-        public IEnumerable<PostDTO> GetAllPosts()
+        public List<PostDTO> GetAllPosts()
         {
-            throw new NotImplementedException();
+            int ID = -1;
+            string Title = "";
+            string AuthorID = "";
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            List<PostDTO> posts = new List<PostDTO>();
+            try
+            {
+                cmd.CommandText = $"SELECT * FROM public.\"Post\"";
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ID = Convert.ToInt32(reader["ID"]);
+                    Title = reader["Title"].ToString();
+                    AuthorID = reader["AuthorID"].ToString();
+                    posts.Add(new PostDTO(ID, Title, AuthorID, null));
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return posts;
         }
 
         public Task<Post> GetPostById(int id)
