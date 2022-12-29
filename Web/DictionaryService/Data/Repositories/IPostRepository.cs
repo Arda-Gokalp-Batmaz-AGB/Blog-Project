@@ -7,7 +7,7 @@ namespace DictionaryService.Data.Repositories
     public interface IPostRepository
     {
         public List<PostDTO> GetAllPosts();
-        public Task<Post> GetPostById(int id);
+        public PostDTO GetPostById(int id);
         public int FindPostIdByTitle(string Title);
         public Task<Post> GetPostComments(string username);
 

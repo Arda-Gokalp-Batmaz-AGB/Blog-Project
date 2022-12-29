@@ -22,7 +22,8 @@ namespace DictionaryService.Services
             List<PostDTO> updatedPostList = new List<PostDTO>();
             foreach (PostDTO post in postList)
             {
-
+                post.comments = GetPostComments(post.ID);
+                updatedPostList.Add(post);
             }
             return updatedPostList;
         }
@@ -37,9 +38,10 @@ namespace DictionaryService.Services
             throw new NotImplementedException();
         }
 
-        public Task<CommentDTO> GetPostComments(string username)
+        public List<CommentDTO> GetPostComments(int postID)
         {
-            throw new NotImplementedException();
+            var comments = _repository.GetPostComments(postID);
+            return comments;
         }
 
         public Task<CommentDTO> InsertComment(AddUpdateCommentBindingModel model)

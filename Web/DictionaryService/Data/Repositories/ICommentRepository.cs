@@ -6,7 +6,7 @@ namespace DictionaryService.Data.Repositories
 {
     public interface ICommentRepository
     {
-        public IEnumerable<CommentDTO> GetPostComments(int postID);
+        public List<CommentDTO> GetPostComments(int postID);
         public Task<CommentDTO> getFirstCommentOfPost(int postID);
 
         public Task<CommentDTO> InsertCommentToPost(AddUpdateCommentBindingModel model);

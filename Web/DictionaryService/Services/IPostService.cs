@@ -9,7 +9,7 @@ namespace DictionaryService.Data.Repositories
         public List<PostDTO> ListAllPosts();
         public IEnumerable<PostDTO> ListFilteredPosts(string[] categories);
         public IEnumerable<CommentDTO> ListPostComments();
-        public Task<PostDTO> GetPost(int id);
+        public PostDTO GetPost(string param,object value);
         public Task<Post> InsertPost(AddUpdatePostBindingModel model);
     }
 }

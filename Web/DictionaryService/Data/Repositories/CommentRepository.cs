@@ -1,6 +1,8 @@
 ﻿using DictionaryService.Models.BindingModel;
 using DictionaryService.Models.DTO;
 using Npgsql;
+using System.Data.SqlTypes;
+
 namespace DictionaryService.Data.Repositories
 {
     public class CommentRepository : ICommentRepository
@@ -22,9 +24,45 @@ namespace DictionaryService.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CommentDTO> GetPostComments(int postID)
+        public List<CommentDTO> GetPostComments(int postID)
         {
-            throw new NotImplementedException();
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            List<CommentDTO> comments = new List<CommentDTO>();
+            try
+            {
+                cmd.CommandText = $"SELECT * FROM public.\"Comment\" WHERE \"PostID\" = @PostID;";
+                cmd.Parameters.AddWithValue("PostID", postID);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int ID = Convert.ToInt32(reader["ID"]);
+                    string Text = reader["Text"].ToString();
+                    DateTime create = DateTime.Parse(reader["CreateDate"].ToString());
+                    DateTime update = DateTime.Parse(reader["UpdateDate"].ToString());
+                    int PostID = Convert.ToInt32(reader["PostID"]);
+                    int ParentID = -1;
+                    if (reader["ParentID"] != DBNull.Value)
+                    {
+                        ParentID = Convert.ToInt32(reader["ParentID"]);
+                    }
+                    string AuthorID = reader["AuthorID"].ToString();
+                    comments.Add(new CommentDTO(ID,Text,create,update,postID, ParentID,AuthorID));
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return comments;
         }
 
         public Task<CommentDTO> InsertCommentToPost(AddUpdateCommentBindingModel model)

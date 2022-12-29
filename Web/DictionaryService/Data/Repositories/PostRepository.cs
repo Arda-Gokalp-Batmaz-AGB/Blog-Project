@@ -42,7 +42,6 @@ namespace DictionaryService.Data.Repositories
                 {
                     ID = Convert.ToInt32(reader["ID"]);
                 }
-                return ID;
             }
             catch (Exception ex)
             {
@@ -52,6 +51,8 @@ namespace DictionaryService.Data.Repositories
             {
                 reader.Close();
             }
+            return ID;
+
         }
 
         public List<PostDTO> GetAllPosts()
@@ -89,9 +90,40 @@ namespace DictionaryService.Data.Repositories
             return posts;
         }
 
-        public Task<Post> GetPostById(int id)
+        public PostDTO GetPostById(int id)
         {
-            throw new NotImplementedException();
+            PostDTO post = null;
+
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            try
+            {
+                cmd.CommandText = $"SELECT * FROM public.\"Post\" where \"ID\" = @ID;";
+                cmd.Parameters.AddWithValue("ID", id);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    int ID = Convert.ToInt32(reader["ID"]);
+                    string Title = reader["Title"].ToString();
+                    string AuthorID = reader["AuthorID"].ToString();
+                    post = new PostDTO(ID, Title, AuthorID, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return post;
+
         }
 
         public Task<Post> GetPostComments(string username)

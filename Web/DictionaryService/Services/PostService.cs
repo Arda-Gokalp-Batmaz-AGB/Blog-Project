@@ -11,9 +11,23 @@ namespace DictionaryService.Data.Repositories
         {
             _repository = repository;
         }
-        public Task<PostDTO> GetPost(int id)
+        public PostDTO GetPost(string param, object value)
         {
-            throw new NotImplementedException();
+            PostDTO post = null;
+            int ID = -1;
+            if (param == "ID")
+            {
+                ID = Convert.ToInt32(value);
+            }
+            else if(param == "Title")
+            {
+                ID = _repository.FindPostIdByTitle(value.ToString());
+            }
+            if(ID !=-1)
+            {
+                post = _repository.GetPostById(ID);
+            }
+            return post;
         }
 
         public async Task<Post> InsertPost(AddUpdatePostBindingModel model)
