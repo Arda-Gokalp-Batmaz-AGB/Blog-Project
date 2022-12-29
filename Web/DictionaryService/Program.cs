@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using DictionaryService.Data.Entities;
 using DictionaryService.Models.DTO;
 using DictionaryService.Data.Repositories;
+using DictionaryService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ builder.Services.AddSwaggerGen();
 //});builder.Configuration.GetConnectionString("DefaultConnection")
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 var app = builder.Build();

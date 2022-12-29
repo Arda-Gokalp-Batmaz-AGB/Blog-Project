@@ -17,8 +17,8 @@ namespace AuthorizationService.Controllers
     public class BlogController : ControllerBase
     {
         private readonly ILogger<BlogController> _logger;
-        private readonly IPostService _service;
-        public BlogController(IPostService service,ILogger<BlogController> logger)
+        private readonly IUnitOfWork _service;
+        public BlogController(IUnitOfWork service,ILogger<BlogController> logger)
         {
             _logger = logger;
             _service = service;
@@ -26,7 +26,7 @@ namespace AuthorizationService.Controllers
         [HttpPost("CreatePost")]
         public async Task<IActionResult> CreatePost([FromBody] AddUpdatePostBindingModel model)
         {
-            var result = await _service.InsertPost(model);
+            var result = await _service.InsertNewPost(model);
             if (result !=null)
             {
                 return await Task.FromResult(Ok(result));

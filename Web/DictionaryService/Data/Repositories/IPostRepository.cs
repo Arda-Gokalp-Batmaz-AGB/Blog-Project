@@ -8,6 +8,7 @@ namespace DictionaryService.Data.Repositories
     {
         public IEnumerable<PostDTO> GetAllPosts();
         public Task<Post> GetPostById(int id);
+        public int FindPostIdByTitle(string Title);
         public Task<Post> GetPostComments(string username);
 
         public Task<Post> InsertPost(AddUpdatePostBindingModel model);

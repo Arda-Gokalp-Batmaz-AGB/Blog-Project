@@ -9,6 +9,7 @@ namespace DictionaryService.Models.BindingModel
         [Required]
         public string Title{ get; set; }
         [Required]
-        public Comment FirstComment { get; set; }
-    }
+        public AddUpdateCommentBindingModel FirstComment { get; set; }
+    //public Comment FirstComment { get; set; }
+}
 }

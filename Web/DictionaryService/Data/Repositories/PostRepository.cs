@@ -11,15 +11,47 @@ namespace DictionaryService.Data.Repositories
     {
         private readonly IConfiguration _configuration;
         private readonly string CS;
-        public PostRepository(IConfiguration configuration)
+      //  private readonly ICommentRepository _commentRepository;
+        public PostRepository(IConfiguration configuration)//,ICommentRepository commentRepository
         {
             _configuration = configuration;
             CS = _configuration.GetConnectionString("PostGreConnection");
+            //_commentRepository = commentRepository;
         }
         //private readonly string CS = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public void DeletePost(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public int FindPostIdByTitle(string Title)
+        {
+            int ID = -1;
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            try
+            {
+                cmd.CommandText = $"SELECT \"ID\" FROM public.\"Post\" where \"Title\" = @Title;";
+                cmd.Parameters.AddWithValue("Title", Title);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ID = Convert.ToInt32(reader["ID"]);
+                }
+                return ID;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+            finally
+            {
+                reader.Close();
+            }
         }
 
         public IEnumerable<PostDTO> GetAllPosts()
@@ -40,13 +72,12 @@ namespace DictionaryService.Data.Repositories
         public async Task<Post> InsertPost(AddUpdatePostBindingModel model)
         {
             //var cs = "Host=localhost;Username=postgres;Password=tabak34b;Database=Blog"
-
             using var con = new NpgsqlConnection(CS);
             con.Open();
 
             using var cmd = new NpgsqlCommand();
             cmd.Connection = con;
-
+            int ID = -1;
             //cmd.CommandText = @"INSERT INTO public.""Post""(""Title"", ""AuthorID"") VALUES ('Audi7','8080ff0e-e3dd-46a6-adb5-cdd331458e0c');";
             try
             {
@@ -54,12 +85,16 @@ namespace DictionaryService.Data.Repositories
                 cmd.Parameters.AddWithValue("Title", model.Title);
                 cmd.Parameters.AddWithValue("AuthorID", model.AuthorID);
                 cmd.ExecuteNonQuery();
+
+                ID = FindPostIdByTitle(model.Title);
+
+                //await _commentRepository.InsertFirstCommentToPost(ID, model.FirstComment);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message.ToString());
             }
-            return new Post() { Title = model.Title,AuthorID=model.AuthorID};
+            return new Post() { ID=ID,Title = model.Title,AuthorID=model.AuthorID};
         }
 
         public void UpdatePost(Post updateApp)
