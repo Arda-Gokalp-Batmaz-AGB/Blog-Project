@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MinimizedpostComponent } from './minimizedpost.component';
+import { PostcontentComponent } from './postcontent.component';
 
-describe('MinimizedpostComponent', () => {
-  let component: MinimizedpostComponent;
-  let fixture: ComponentFixture<MinimizedpostComponent>;
+describe('PostcontentComponent', () => {
+  let component: PostcontentComponent;
+  let fixture: ComponentFixture<PostcontentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MinimizedpostComponent ]
+      declarations: [ PostcontentComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MinimizedpostComponent);
+    fixture = TestBed.createComponent(PostcontentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

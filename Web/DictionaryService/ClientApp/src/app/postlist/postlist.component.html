@@ -1,4 +1,22 @@
-<table class="table">
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <app-post *ngFor="let currentPost of posts"
+      [post]="currentPost"></app-post>
+    </div>
+      <div class="col-sm-6">
+        <button>Create Post</button>
+      </div>
+  </div>
+</div>
+
+
+    <!-- <app-post *ngFor="let currentPost of posts"
+    [post]="currentPost"></app-post> -->
+
+
+<!-- <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -15,4 +33,4 @@
       <td>{{ post.comments[0].text }}</td>
     </tr>
   </tbody>
-</table>
+</table> -->

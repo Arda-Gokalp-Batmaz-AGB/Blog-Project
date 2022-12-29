@@ -15,7 +15,7 @@ import { ErrorCatchingInterceptor } from './interceptors/ErrorCatchingIntercepto
 import { GlobalErrorHandler } from './handlers/GlobalErrorHandler';
 import { PostComponent } from './post/post.component';
 import { PostlistComponent } from './postlist/postlist.component';
-import { MinimizedpostComponent } from './minimizedpost/minimizedpost.component';
+import { PostcontentComponent } from './postcontent/postcontent.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { MinimizedpostComponent } from './minimizedpost/minimizedpost.component'
     UserProfileComponent,
     PostComponent,
     PostlistComponent,
-    MinimizedpostComponent,
+    PostcontentComponent,
   ],
   imports: [
     BrowserModule,
