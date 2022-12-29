@@ -14,6 +14,8 @@ import { JwtInterceptor } from './interceptors/JwtInterceptor';
 import { ErrorCatchingInterceptor } from './interceptors/ErrorCatchingInterceptor';
 import { GlobalErrorHandler } from './handlers/GlobalErrorHandler';
 import { PostComponent } from './post/post.component';
+import { PostlistComponent } from './postlist/postlist.component';
+import { MinimizedpostComponent } from './minimizedpost/minimizedpost.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { PostComponent } from './post/post.component';
     UserManagementComponent,
     UserProfileComponent,
     PostComponent,
+    PostlistComponent,
+    MinimizedpostComponent,
   ],
   imports: [
     BrowserModule,
