@@ -2,7 +2,7 @@
 {
     public class CommentDTO
     {
-        public CommentDTO(int ID, string Text, DateTime DateCreated, DateTime DateModified,int PostID,int ParentID,string AuthorID)
+        public CommentDTO(int ID, string Text, DateTime DateCreated, DateTime DateModified,int PostID,int ParentID,string AuthorID,string AuthorName)
         {
             this.ID = ID;
             this.Text = Text;
@@ -11,6 +11,7 @@
             this.PostID = PostID;
             this.ParentID = ParentID;
             this.AuthorID = AuthorID;
+            this.AuthorName = AuthorName;
         }
         public CommentDTO() { }
         public int ID { get; set; }
@@ -20,5 +21,6 @@
         public int PostID { get; set; }
         public int ParentID { get; set; }
         public string AuthorID { get; set; }
+        public string? AuthorName { get; set; }
     }
 }

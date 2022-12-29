@@ -19,6 +19,38 @@ namespace DictionaryService.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public string GetAuthorById(string id)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            string AuthorName = "";
+            try
+            {
+                cmd.CommandText = $"SELECT \"UserName\" FROM public.\"User\" WHERE \"Id\" = @Id;";
+                cmd.Parameters.AddWithValue("Id", id);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    AuthorName = reader["UserName"].ToString();
+                    // string ID = reader["Id"].ToString();
+                    //string Text = reader["Text"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return AuthorName;
+        }
+
         public Task<CommentDTO> getFirstCommentOfPost(int postID)
         {
             throw new NotImplementedException();
@@ -51,7 +83,7 @@ namespace DictionaryService.Data.Repositories
                         ParentID = Convert.ToInt32(reader["ParentID"]);
                     }
                     string AuthorID = reader["AuthorID"].ToString();
-                    comments.Add(new CommentDTO(ID,Text,create,update,postID, ParentID,AuthorID));
+                    comments.Add(new CommentDTO(ID,Text,create,update,postID, ParentID,AuthorID, GetAuthorById(AuthorID)));
                 }
             }
             catch (Exception ex)

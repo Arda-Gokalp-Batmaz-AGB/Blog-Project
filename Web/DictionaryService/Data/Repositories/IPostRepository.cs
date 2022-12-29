@@ -8,6 +8,7 @@ namespace DictionaryService.Data.Repositories
     {
         public List<PostDTO> GetAllPosts();
         public PostDTO GetPostById(int id);
+        public string GetAuthorById(string id);
         public int FindPostIdByTitle(string Title);
         public Task<Post> GetPostComments(string username);
 

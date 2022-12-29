@@ -76,7 +76,7 @@ namespace DictionaryService.Data.Repositories
                     ID = Convert.ToInt32(reader["ID"]);
                     Title = reader["Title"].ToString();
                     AuthorID = reader["AuthorID"].ToString();
-                    posts.Add(new PostDTO(ID, Title, AuthorID, null));
+                    posts.Add(new PostDTO(ID, Title, AuthorID, null, GetAuthorById(AuthorID)));
                 }
             }
             catch (Exception ex)
@@ -88,6 +88,37 @@ namespace DictionaryService.Data.Repositories
                 reader.Close();
             }
             return posts;
+        }
+        public string GetAuthorById(string id)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            string AuthorName = "";
+            try
+            {
+                cmd.CommandText = $"SELECT \"UserName\" FROM public.\"User\" WHERE \"Id\" = @Id;";
+                cmd.Parameters.AddWithValue("Id", id);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    AuthorName = reader["UserName"].ToString();
+                    // string ID = reader["Id"].ToString();
+                    //string Text = reader["Text"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return AuthorName;
         }
 
         public PostDTO GetPostById(int id)
@@ -111,7 +142,7 @@ namespace DictionaryService.Data.Repositories
                     int ID = Convert.ToInt32(reader["ID"]);
                     string Title = reader["Title"].ToString();
                     string AuthorID = reader["AuthorID"].ToString();
-                    post = new PostDTO(ID, Title, AuthorID, null);
+                    post = new PostDTO(ID, Title, AuthorID, null, GetAuthorById(AuthorID));
                 }
             }
             catch (Exception ex)
