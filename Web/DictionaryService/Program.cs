@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using DictionaryService.Data.Entities;
+using DictionaryService.Models.DTO;
+using DictionaryService.Data.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +12,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddDbContext<AppDbContext>(opt =>
+//{
+//    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+//});builder.Configuration.GetConnectionString("DefaultConnection")
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddSingleton(builder.Configuration.GetConnectionString("DefaultConnection"));
+
 var app = builder.Build();
+
+app.UseCors(x => x
+     .WithOrigins("http://localhost:4200")
+     .AllowAnyMethod()
+     .AllowAnyHeader());
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
