@@ -36,10 +36,25 @@ namespace AuthorizationService.Controllers
             return await Task.FromResult(BadRequest());
         }
         [HttpGet("Posts")]
-        public async Task<ActionResult<IEnumerable<PostDTO>>> GetAllUsers()
+        public async Task<ActionResult<IEnumerable<PostDTO>>> GetAllPosts()
         {
             var posts = _service.ListPosts();
             return await Task.FromResult(Ok(posts));
+        }
+        [HttpGet("{post}")]
+        public async Task<ActionResult<PostDTO>> GetPost(string post)
+        {
+            var foundedPost = _service.GetPostByTitle(post);
+            if (foundedPost == null)
+            {
+                return await Task.FromResult(NotFound(new CustomError()
+                {
+                    name = "Invalid Post Title",
+                    status = "404",
+                    description = "There is not any post with given title"
+                }));
+            }
+            return await Task.FromResult(Ok(foundedPost));
         }
     }
 }
