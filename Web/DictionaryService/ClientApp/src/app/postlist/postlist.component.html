@@ -1,1 +1,18 @@
-<p>postlist works!</p>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ post.title }}</td>
+      <td>{{ post.authorName }}</td>
+      <td>{{ post.comments[0].text }}</td>
+    </tr>
+  </tbody>
+</table>

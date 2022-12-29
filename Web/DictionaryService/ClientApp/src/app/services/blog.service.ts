@@ -6,36 +6,44 @@ import { constants } from "../Helper/constants";
 import { TokenStorageService } from "../token-storage/token-storage.service";
 import { responseUser } from "../models/responseUser";
 import { UserService } from "./user.service";
+import { responsePost } from "../models/responsePost";
+import { responseComment } from "../models/responseComment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
 
-  private readonly BASE_URL = "https://localhost:5001/api/User/";
+  private readonly BASE_URL = "https://localhost:7038/api/Blog/";
   currentUser? : responseUser | null
   constructor(private http: HttpClient, private router : Router,private userService : UserService)
   {
     this.currentUser = this.userService.currentUserValue;
   }
 
-  public getAllPosts() : Observable<Array<responseUser>>
+  public getAllPosts() : Observable<Array<responsePost>>
   {
-    return this.http.get<responseUser[]>(this.BASE_URL + "Users",).pipe(
-      map((res : responseUser[]) => {
-        let userList = new Array<responseUser>();
+    return this.http.get<responsePost[]>(this.BASE_URL + "Posts",).pipe(
+      map((res : responsePost[]) => {
+        let postList = new Array<responsePost>();
         if(res)
         {
           res.map((value) => {
-            userList.push(new responseUser(value.userName,value.email,value.dateCreated,value.token));
+            let comments = value.comments.map(x => {
+              x = new responseComment(x.id,x.text,x.dateCreated,x.dateModified,x.postID,x.parentID,x.authorID,x.authorName)
+              return x;
+            });
+            postList.push(new responsePost(value.id,value.title,value.authorID,comments,value.authorName));
           })
         }
-        return userList;
+        return postList;
       }),
       catchError(this.handleError),
 
     )
   }
+
+
   private handleError(error : HttpErrorResponse)
   {
     return throwError(() => error);
