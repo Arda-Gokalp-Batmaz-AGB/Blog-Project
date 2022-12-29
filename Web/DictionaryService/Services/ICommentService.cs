@@ -6,6 +6,7 @@ namespace DictionaryService.Services
     public interface ICommentService
     {
         public IEnumerable<CommentDTO> GetPostComments();
+        public List<PostDTO> GetAllPostAllCommentsMatched(List<PostDTO> postList);
         public Task<CommentDTO> getFirstCommentOfPost(int postID);
         public Task<CommentDTO> GetPostComments(string username);
 

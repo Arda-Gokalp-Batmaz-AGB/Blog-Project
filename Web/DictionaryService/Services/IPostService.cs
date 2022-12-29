@@ -6,7 +6,7 @@ namespace DictionaryService.Data.Repositories
     public interface IPostService
     { 
     
-        public IEnumerable<PostDTO> ListAllPosts();
+        public List<PostDTO> ListAllPosts();
         public IEnumerable<PostDTO> ListFilteredPosts(string[] categories);
         public IEnumerable<CommentDTO> ListPostComments();
         public Task<PostDTO> GetPost(int id);

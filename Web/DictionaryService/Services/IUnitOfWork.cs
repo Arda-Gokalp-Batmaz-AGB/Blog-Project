@@ -1,6 +1,7 @@
 ﻿using DictionaryService.Data.Entities;
 using DictionaryService.Data.Repositories;
 using DictionaryService.Models.BindingModel;
+using DictionaryService.Models.DTO;
 
 namespace DictionaryService.Services
 {
@@ -8,6 +9,7 @@ namespace DictionaryService.Services
     {
         public IPostService _postService{ get; }
         public ICommentService _commentService { get; }
+        public IEnumerable<PostDTO> ListPosts();
         public Task<Post> InsertNewPost(AddUpdatePostBindingModel model);
     }
 }

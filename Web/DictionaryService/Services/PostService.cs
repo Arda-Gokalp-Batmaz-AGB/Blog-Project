@@ -29,9 +29,10 @@ namespace DictionaryService.Data.Repositories
             }
         }
 
-        public IEnumerable<PostDTO> ListAllPosts()
+        public List<PostDTO> ListAllPosts()
         {
-            throw new NotImplementedException();
+            var postList = _repository.GetAllPosts();
+            return postList;
         }
 
         public IEnumerable<PostDTO> ListFilteredPosts(string[] categories)

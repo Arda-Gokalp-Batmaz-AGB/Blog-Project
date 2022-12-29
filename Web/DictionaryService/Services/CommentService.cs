@@ -17,6 +17,16 @@ namespace DictionaryService.Services
             throw new NotImplementedException();
         }
 
+        public List<PostDTO> GetAllPostAllCommentsMatched(List<PostDTO> postList)
+        {
+            List<PostDTO> updatedPostList = new List<PostDTO>();
+            foreach (PostDTO post in postList)
+            {
+
+            }
+            return updatedPostList;
+        }
+
         public Task<CommentDTO> getFirstCommentOfPost(int postID)
         {
             throw new NotImplementedException();

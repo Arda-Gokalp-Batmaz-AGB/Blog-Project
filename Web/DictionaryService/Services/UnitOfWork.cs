@@ -22,5 +22,12 @@ namespace DictionaryService.Services
             var comment = await _commentService.InsertFirstCommentOfPost(post.ID, model.FirstComment);
             return post;
         }
+
+        public IEnumerable<Models.DTO.PostDTO> ListPosts()
+        {
+            var rawPostList = _postService.ListAllPosts();
+            var postsWithComments = _commentService.GetAllPostAllCommentsMatched(rawPostList)
+            return postsWithComments;
+        }
     }
 }
