@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { responsePost } from '../models/responsePost';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '../services/blog.service';
+import { UserService } from '../services/user.service';
+import { responseUser } from '../models/responseUser';
+import { responseComment } from '../models/responseComment';
 
 @Component({
   selector: 'app-postcontent',
@@ -14,7 +17,9 @@ export class PostcontentComponent implements OnInit {
   showError : boolean = false;
   responseErrors? : string[];
   postLoaded : boolean = false;
-  constructor(private _activatedRoute: ActivatedRoute,private blogService : BlogService) {
+  currentUser? : responseUser | null
+  constructor(private _activatedRoute: ActivatedRoute,
+    private blogService : BlogService,private userService : UserService) {
     _activatedRoute.params.subscribe(params => {
       this.postTitle = (params['title']);
       this.findPost();
@@ -45,5 +50,30 @@ export class PostcontentComponent implements OnInit {
         console.log(res);
       },
     });
+  }
+  updatePost(type : string) : void
+  {
+    this.currentUser = this.userService.currentUserValue
+    if(!this.currentUser!.id)
+    {
+      this.userService.returnLoginPage();
+      return;
+    }
+    this.blogService.interactComment(this.post!.comments[0].id,type,this.currentUser!.id).subscribe({
+      next: (x : responseComment) => {
+
+      this.post!.comments[0].likeCount = x.likeCount;
+      this.post!.comments[0].dislikeCount =  x.dislikeCount;
+    },
+    error: (err) => {
+      console.log('Error in interaction');
+      console.log(err);
+    },
+  });
+  }
+
+  interactionPost(interecactionType : string) : void
+  {
+    this.updatePost(interecactionType);
   }
 }
