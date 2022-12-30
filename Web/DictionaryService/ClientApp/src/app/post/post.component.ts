@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
 
   currentUser? : responseUser | null
   @Input() post! : responsePost
+  interactionCount = 0;
   ngOnInit(): void {
   }
 
