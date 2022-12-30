@@ -12,6 +12,8 @@ namespace DictionaryService.Data.Repositories
 
         public Task<CommentDTO> InsertCommentToPost(AddUpdateCommentBindingModel model);
         public Task<CommentDTO> InsertFirstCommentToPost(int PostID, AddUpdateCommentBindingModel model);
+
+        public CommentDTO InteractWithComment(AddInteractionToComment model);
         public void DeleteComment(int id);
         public void UpdateComment(CommentDTO updatedComment);
     }

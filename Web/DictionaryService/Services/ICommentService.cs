@@ -13,5 +13,7 @@ namespace DictionaryService.Services
         public Task<CommentDTO> InsertFirstCommentOfPost(int PostID, AddUpdateCommentBindingModel model);
         public void DeleteComment(int id);
         public void UpdateComment(CommentDTO updatedComment);
+
+        public CommentDTO InteractComment(AddInteractionToComment model);
     }
 }

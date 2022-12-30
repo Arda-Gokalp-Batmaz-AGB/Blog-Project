@@ -55,6 +55,15 @@ namespace DictionaryService.Services
             return result;
         }
 
+        public CommentDTO InteractComment(AddInteractionToComment model)
+        {
+            if (model.InteractionType == "like" || model.InteractionType == "dislike")
+            {
+                return _repository.InteractWithComment(model);
+            }
+            return null;
+        }
+
         public void UpdateComment(CommentDTO updatedComment)
         {
             throw new NotImplementedException();

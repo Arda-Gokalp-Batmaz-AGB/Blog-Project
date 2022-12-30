@@ -83,7 +83,10 @@ namespace DictionaryService.Data.Repositories
                         ParentID = Convert.ToInt32(reader["ParentID"]);
                     }
                     string AuthorID = reader["AuthorID"].ToString();
-                    comments.Add(new CommentDTO(ID,Text,create,update,postID, ParentID,AuthorID, GetAuthorById(AuthorID)));
+                    int likeCount = GetInteractionCount("like", ID);
+                    int dislikeCount = GetInteractionCount("dislike", ID);
+                    comments.Add(new CommentDTO(ID,Text,create,update,postID, 
+                        ParentID,AuthorID, GetAuthorById(AuthorID), likeCount,dislikeCount));
                 }
             }
             catch (Exception ex)
@@ -97,6 +100,39 @@ namespace DictionaryService.Data.Repositories
             return comments;
         }
 
+        private int GetInteractionCount(string type,int commentID)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            List<CommentDTO> comments = new List<CommentDTO>();
+            int count = 0;
+            try
+            {
+                cmd.CommandText = $"SELECT \"ID\",Count(*) AS interactionCount FROM \"Comment\" " +
+                    $"LEFT JOIN \"Interact\" ON \"ID\" = \"CommentID\"" +
+                    $"WHERE \"Type\" = @Type GROUP BY \"ID\" HAVING \"ID\" = @id";
+                cmd.Parameters.AddWithValue("id", commentID);
+                cmd.Parameters.AddWithValue("Type", type);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    count = Convert.ToInt32(reader["interactionCount"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return count;
+        }
         public Task<CommentDTO> InsertCommentToPost(AddUpdateCommentBindingModel model)
         {
             throw new NotImplementedException();
@@ -130,6 +166,93 @@ namespace DictionaryService.Data.Repositories
             return new CommentDTO() { AuthorID = model.AuthorID,Text = model.Text };
         }
 
+        public CommentDTO InteractWithComment(AddInteractionToComment model)
+        {
+            checkLastInteractionRemoveIfExists(model);
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+
+            try
+            {
+                cmd.CommandText = 
+                $"INSERT INTO public.\"Interact\"(\"CommentID\", \"UserID\", \"Type\", \"Date\")" +
+	            $"VALUES(@CommentID, @UserID, @Type, @CreateDate); ";
+                cmd.Parameters.AddWithValue("CommentID", model.CommentID);
+                cmd.Parameters.AddWithValue("UserID", model.UserID);
+                cmd.Parameters.AddWithValue("Type", model.InteractionType);
+                cmd.Parameters.AddWithValue("CreateDate", DateTime.Now);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return new CommentDTO() { ID = model.CommentID,
+                LikeCount = GetInteractionCount("like",model.CommentID),
+            DislikeCount = GetInteractionCount("dislike",model.CommentID)};//get interaction count
+        }
+
+        private void checkLastInteractionRemoveIfExists(AddInteractionToComment model)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            if (checkInteraction(model) == false)
+                return;
+            try
+            {
+                cmd.CommandText =
+                $"DELETE FROM public.\"Interact\"" +
+                $"WHERE \"CommentID\" = @CommentID AND \"UserID\" = @UserID; ";
+                cmd.Parameters.AddWithValue("CommentID", model.CommentID);
+                cmd.Parameters.AddWithValue("UserID", model.UserID);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+        }
+        private bool checkInteraction(AddInteractionToComment model)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            string AuthorName = "";
+            try
+            {
+                cmd.CommandText = $"SELECT * FROM public.\"Interact\"" +
+                    $"WHERE \"CommentID\" = @CommentID AND \"UserID\" = @UserID;";
+                cmd.Parameters.AddWithValue("CommentID", model.CommentID);
+                cmd.Parameters.AddWithValue("UserID", model.UserID);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    return true;
+                    // string ID = reader["Id"].ToString();
+                    //string Text = reader["Text"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return false;
+        }
         public void UpdateComment(CommentDTO updatedComment)
         {
             throw new NotImplementedException();

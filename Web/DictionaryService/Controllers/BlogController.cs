@@ -56,5 +56,16 @@ namespace AuthorizationService.Controllers
             }
             return await Task.FromResult(Ok(foundedPost));
         }
+        [HttpPost("InteractComment")]
+        public async Task<IActionResult> InteractComment([FromBody] AddInteractionToComment model)
+        {
+            var result = _service.InteractComment(model);
+            if (result != null)
+            {
+                return await Task.FromResult(Ok(result));
+            }
+
+            return await Task.FromResult(BadRequest());
+        }
     }
 }

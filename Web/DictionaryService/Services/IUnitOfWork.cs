@@ -11,7 +11,7 @@ namespace DictionaryService.Services
         public ICommentService _commentService { get; }
         public IEnumerable<PostDTO> ListPosts();
         public Task<Post> InsertNewPost(AddUpdatePostBindingModel model);
-
         public PostDTO GetPostByTitle(string postTitle);
+        public CommentDTO InteractComment(AddInteractionToComment model);
     }
 }

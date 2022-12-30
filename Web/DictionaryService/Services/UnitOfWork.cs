@@ -20,7 +20,10 @@ namespace DictionaryService.Services
         public async Task<Post> InsertNewPost(AddUpdatePostBindingModel model)
         {
             var post = await _postService.InsertPost(model);
-            var comment = await _commentService.InsertFirstCommentOfPost(post.ID, model.FirstComment);
+            if(post != null)
+            {
+                var comment = await _commentService.InsertFirstCommentOfPost(post.ID, model.FirstComment);
+            }
             return post;
         }
 
@@ -41,6 +44,12 @@ namespace DictionaryService.Services
             }
 
             return post;
+        }
+
+        public CommentDTO InteractComment(AddInteractionToComment model)
+        {
+            var comment = _commentService.InteractComment(model);
+            return comment;
         }
     }
 }
