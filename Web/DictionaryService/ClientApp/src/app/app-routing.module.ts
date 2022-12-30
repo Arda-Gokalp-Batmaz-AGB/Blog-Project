@@ -8,12 +8,14 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PostlistComponent } from './postlist/postlist.component';
 import { PostcontentComponent } from './postcontent/postcontent.component';
+import { CreatepostComponent } from './createpost/createpost.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'usermanagement', component: UserManagementComponent , canActivate : [AuthGuard]},
+  { path: 'newpost', component: CreatepostComponent , canActivate : [AuthGuard]},
   { path: 'profile/:username', component: UserProfileComponent},
   { path: 'post/:title', component: PostcontentComponent},
   { path: 'postlist', component: PostlistComponent},
