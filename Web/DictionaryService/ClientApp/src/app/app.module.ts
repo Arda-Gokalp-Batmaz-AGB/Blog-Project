@@ -16,6 +16,7 @@ import { GlobalErrorHandler } from './handlers/GlobalErrorHandler';
 import { PostComponent } from './post/post.component';
 import { PostlistComponent } from './postlist/postlist.component';
 import { PostcontentComponent } from './postcontent/postcontent.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PostcontentComponent } from './postcontent/postcontent.component';
     PostComponent,
     PostlistComponent,
     PostcontentComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

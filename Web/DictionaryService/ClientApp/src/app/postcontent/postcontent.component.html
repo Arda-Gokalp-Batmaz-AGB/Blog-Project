@@ -1,1 +1,21 @@
-<p>postcontent works!</p>
+<div
+  [hidden]="postLoaded"
+  class="spinner-border"
+  role="status"
+  >
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div *ngIf="!showError && postLoaded">
+<h1>{{post?.title}}</h1>
+<h5><a class="postDirection" routerLink="/profile/{{post?.authorName}}" >{{post?.authorName}}</a></h5>
+ <p> {{post!.comments[0]!.text}}</p>
+ <div class = "comments">
+  <h6>Comments :</h6>
+  <div *ngFor="let comment of post!.comments?.slice(1)">
+    <app-comment [comment]="comment"></app-comment>
+  </div>
+ </div>
+</div>
+<div *ngFor="let err of responseErrors">
+  <div>{{ err }}</div>
+</div>

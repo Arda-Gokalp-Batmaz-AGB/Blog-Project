@@ -1,8 +1,8 @@
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">{{post.title}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{post.authorName}}</h6>
-    <p class="card-text">{{post.comments[0].text}}</p>
+    <h5 class="card-title"><a routerLink="/post/{{post.title}}" class = "postDirection">{{post.title}}</a></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><a routerLink="/profile/{{post.authorName}}" class = "postDirection">{{post.authorName}}</a></h6>
+    <p class="card-text"><a routerLink="/post/{{post.title}}" class = "postDirection">{{post.comments[0].text}}</a></p>
     <a href="#" class="card-link">Like</a>
     <a href="#" class="card-link">Dislike</a>
     <a href="#" class="card-link">Interaction</a>

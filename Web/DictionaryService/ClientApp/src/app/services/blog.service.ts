@@ -42,6 +42,19 @@ export class BlogService {
 
     )
   }
+  public getPost(title : string): Observable<responsePost>
+  {
+    return this.http.get<responsePost>(this.BASE_URL + `${title}` ,).pipe(
+      map((res : responsePost) => {
+        let comments = res.comments.map(x => {
+          x = new responseComment(x.id,x.text,x.dateCreated,x.dateModified,x.postID,x.parentID,x.authorID,x.authorName)
+          return x;
+        });
+        return new responsePost(res.id,res.title,res.authorID,comments,res.authorName);
+      }),
+      catchError(this.handleError),
+    );
+  }
 
 
   private handleError(error : HttpErrorResponse)

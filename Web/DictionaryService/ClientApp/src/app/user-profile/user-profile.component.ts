@@ -40,6 +40,7 @@ export class UserProfileComponent implements OnInit {
           console.log('Error in getuser');
           this.showError = true;
           this.responseErrors = err;
+          this.profileLoaded = true;
           console.log(err);
         },
         next: (res) => {
