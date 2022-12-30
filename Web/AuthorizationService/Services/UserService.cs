@@ -91,7 +91,7 @@ namespace AuthorizationService.Services
             SignInResult result = await _repository.SignInUserAsync(user.UserName, userModel.Password);
             if (result.Succeeded)
             {
-                var appUser = new UserDTO(user.UserName, user.Email, user.DateCreated);
+                var appUser = new UserDTO(user.Id,user.UserName, user.Email, user.DateCreated);
                 appUser.Token = GenerateToken(user);
                 return appUser;
             }
