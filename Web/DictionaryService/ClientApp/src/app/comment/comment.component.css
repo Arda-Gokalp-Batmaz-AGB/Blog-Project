@@ -3,3 +3,8 @@
   color: black;
   text-decoration: none;
 }
+.charCounter
+{
+  min-height: 1px;
+  display: inline-block;
+}
