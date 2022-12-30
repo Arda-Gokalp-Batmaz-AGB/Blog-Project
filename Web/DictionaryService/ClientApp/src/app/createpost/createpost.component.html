@@ -1,1 +1,86 @@
-<p>createpost works!</p>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+  integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" src="../../assets/style.css"/>
+  <script src="../../assets/index.var.js"></script>
+
+<div *ngIf = "operationApproved">
+  <span class="icon approve">
+    <i class="fa fa-check"></i>
+  </span>
+</div>
+<div *ngIf = "!operationApproved" class="container h-100">
+  <div class="d-flex justify-content-center h-100">
+    <div class="user_card">
+      <div class="d-flex justify-content-center"></div>
+      <div class="d-flex justify-content-center form_container">
+        <form
+          class="createPostForm"
+          [formGroup]="createPostForm"
+          (ngSubmit)="create(createPostForm.value)"
+        >
+        <h4>Title</h4>
+          <div class="input-group mb-3">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+            </div>
+            <input
+              type="text"
+              class="form-control input_title"
+              formControlName="title"
+              placeholder="Enter a title"
+              [maxlength]="maxCharsTitle"
+              #title
+            />
+
+          </div>
+          <div class="charCounter">
+          <label class="nopadding clrlbl">
+            Characters Remaining: {{title.value.length}} /{{maxCharsTitle}}</label>
+          </div>
+          <h4>Content</h4>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+            </div>
+            <textarea
+              type="textarea"
+              class="form-control input_text"
+              formControlName="text"
+              placeholder="Enter content of post"
+              rows="12" cols="70"
+              [maxlength]="maxCharsText"
+              #text
+            ></textarea>
+
+          </div>
+          <div class="charCounter">
+          <label class="nopadding clrlbl">
+            Characters Remaining: {{text.value.length}} /{{maxCharsText}}</label>
+          </div>
+          <div class="d-flex justify-content-center mt-3 login_container">
+            <button
+              type="button"
+              type="submit"
+              name="button"
+              class="btn login_btn submitbutton"
+              #submitButton
+            >
+              PUBLISH
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

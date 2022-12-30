@@ -8,6 +8,8 @@ import { responseUser } from "../models/responseUser";
 import { UserService } from "./user.service";
 import { responsePost } from "../models/responsePost";
 import { responseComment } from "../models/responseComment";
+import { createPost } from "../models/createPost";
+import { createComment } from "../models/createComment";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class BlogService {
 
   private readonly BASE_URL = "https://localhost:7038/api/Blog/";
   currentUser? : responseUser | null
-  constructor(private http: HttpClient, private router : Router,private userService : UserService)
+  constructor(private http: HttpClient, private router : Router,private route: ActivatedRoute,private userService : UserService)
   {
     this.currentUser = this.userService.currentUserValue;
   }
@@ -54,6 +56,33 @@ export class BlogService {
       }),
       catchError(this.handleError),
     );
+  }
+  public createPost(authorID:string, title : string, text : string) : Observable<string>
+  {
+    const comment : createComment =
+    {
+      Text: text,
+      PostID: -1,
+      ParentID: -1,
+      AuthorID: authorID
+    }
+    const body : createPost=
+    {
+      AuthorID:authorID,
+      Title:title,
+      FirstComment:comment
+    }
+    return this.http.post<string>(this.BASE_URL + "CreatePost",body,{ responseType: 'text' as 'json'}).pipe(
+      catchError(this.handleError),
+      shareReplay()
+    );
+  }
+  public redirectAfterCreatePost()
+  {
+    //this.router.navigateByUrl('/postlist' as string);
+    setTimeout(() => {
+      this.router.navigate(['/postlist']);
+  }, 3000)
   }
 
 
