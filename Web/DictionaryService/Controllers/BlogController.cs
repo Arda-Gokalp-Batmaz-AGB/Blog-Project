@@ -41,7 +41,7 @@ namespace AuthorizationService.Controllers
             var posts = _service.ListPosts();
             return await Task.FromResult(Ok(posts));
         }
-        [HttpGet("{post}")]
+        [HttpGet("post/{post}")]
         public async Task<ActionResult<PostDTO>> GetPost(string post)
         {
             var foundedPost = _service.GetPostByTitle(post);
@@ -66,6 +66,21 @@ namespace AuthorizationService.Controllers
             }
 
             return await Task.FromResult(BadRequest());
+        }
+        [HttpGet("profile/{username}")]
+        public async Task<IActionResult> GetUser(string username)
+        {
+            var user = _service.GetUserProfile(username);
+            if (user == null)
+            {
+                return await Task.FromResult(NotFound(new CustomError()
+                {
+                    name = "Invalid User",
+                    status = "404",
+                    description = "There is not any user with given name"
+                }));
+            }
+            return await Task.FromResult(Ok(user));
         }
     }
 }

@@ -10,11 +10,13 @@ namespace DictionaryService.Services
         public IPostService _postService { get; }
 
         public ICommentService _commentService { get; }
+        public IUserService _userService { get; }
 
-        public UnitOfWork(IPostService postService, ICommentService commentService)
+        public UnitOfWork(IPostService postService, ICommentService commentService, IUserService userService)
         {
             _postService = postService;
             _commentService = commentService;
+            _userService = userService;
         }
 
         public async Task<Post> InsertNewPost(AddUpdatePostBindingModel model)
@@ -50,6 +52,12 @@ namespace DictionaryService.Services
         {
             var comment = _commentService.InteractComment(model);
             return comment;
+        }
+
+        public UserDTO GetUserProfile(string username)
+        {
+            var user = _userService.getUserProfile(username);
+            return user;
         }
     }
 }
