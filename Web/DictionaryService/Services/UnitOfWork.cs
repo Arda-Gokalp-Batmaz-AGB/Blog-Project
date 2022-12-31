@@ -59,5 +59,11 @@ namespace DictionaryService.Services
             var user = _userService.getUserProfile(username);
             return user;
         }
+
+        public UserDTO FollowUser(FollowBindingModel model)
+        {
+            var user = _userService.FollowUser(model);
+            return user;
+        }
     }
 }

@@ -2,6 +2,10 @@
 {
     public class UserDTO
     {
+        public UserDTO()
+        {
+        }
+
         public UserDTO(string Id, string UserName, string Name, string Surname, 
             string About, List<string> followers, List<string> followeds, DateTime DateCreated)
         {

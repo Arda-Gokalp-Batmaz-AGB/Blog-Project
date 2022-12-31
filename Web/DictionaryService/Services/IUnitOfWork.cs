@@ -13,7 +13,8 @@ namespace DictionaryService.Services
         public Task<Post> InsertNewPost(AddUpdatePostBindingModel model);
         public PostDTO GetPostByTitle(string postTitle);
         public CommentDTO InteractComment(AddInteractionToComment model);
-
         public UserDTO GetUserProfile(string username);
+
+        public UserDTO FollowUser(FollowBindingModel model);
     }
 }

@@ -82,5 +82,20 @@ namespace AuthorizationService.Controllers
             }
             return await Task.FromResult(Ok(user));
         }
+        [HttpPost("Follow")]
+        public async Task<IActionResult> FollowUser([FromBody] FollowBindingModel model)
+        {
+            var user = _service.FollowUser(model);
+            if (user == null)
+            {
+                return await Task.FromResult(NotFound(new CustomError()
+                {
+                    name = "Invalid User",
+                    status = "404",
+                    description = "There is not any user with given name"
+                }));
+            }
+            return await Task.FromResult(Ok(user));
+        }
     }
 }

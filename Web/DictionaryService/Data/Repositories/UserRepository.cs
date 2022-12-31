@@ -157,5 +157,118 @@ namespace DictionaryService.Data.Repositories
             return 0;
         }
 
+        public UserDTO FollowUser(string followerID, string followedID)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+
+            try
+            {
+                cmd.CommandText =
+                    $"INSERT INTO public.\"Follow\"(\"FollowerID\", \"FollowedID\", \"Date\")" +
+                    $"VALUES (@FollowerID, @FollowedID, @Date);";
+                cmd.Parameters.AddWithValue("FollowerID", followerID);
+                cmd.Parameters.AddWithValue("FollowedID", followedID);
+                cmd.Parameters.AddWithValue("Date", DateTime.Now);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            return new UserDTO() { Id = followedID};
+        }
+
+
+        public string findIdByUserName(string username)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            string ID = "";
+            try
+            {
+                cmd.CommandText =
+                    $"SELECT \"Id\" FROM public.\"User\" WHERE \"UserName\" = @UserName;";
+                cmd.Parameters.AddWithValue("UserName", username);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ID = reader["Id"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return ID;
+        }
+
+        public bool FollowExists(string followerID, string followedID)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            string ID = "";
+            try
+            {
+                cmd.CommandText =
+                    $"SELECT \"FollowerID\", \"FollowedID\", \"Date\" FROM public.\"Follow\"" +
+                    $"Where \"FollowerID\" = @FollowerID AND \"FollowedID\" = @FollowedID;";
+                cmd.Parameters.AddWithValue("FollowerID", followerID);
+                cmd.Parameters.AddWithValue("FollowedID", followedID);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return false;
+        }
+
+        public UserDTO UnFollowUser(string followerID, string followedID)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+
+            try
+            {
+                cmd.CommandText =
+                    $"DELETE FROM public.\"Follow\" WHERE \"FollowerID\" = @FollowerID AND \"FollowedID\" = @FollowedID;";
+                cmd.Parameters.AddWithValue("FollowerID", followerID);
+                cmd.Parameters.AddWithValue("FollowedID", followedID);
+                cmd.Parameters.AddWithValue("Date", DateTime.Now);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            return new UserDTO() { Id = followedID};
+        }
     }
 }
