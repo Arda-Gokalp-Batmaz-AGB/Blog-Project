@@ -11,6 +11,7 @@ import { responseComment } from "../models/responseComment";
 import { createPost } from "../models/createPost";
 import { createComment } from "../models/createComment";
 import { interaction } from "../models/interaction";
+import { userProfile } from "../models/userProfile";
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class BlogService {
   }
   public getPost(title : string): Observable<responsePost>
   {
-    return this.http.get<responsePost>(this.BASE_URL + `${title}` ,).pipe(
+    return this.http.get<responsePost>(this.BASE_URL + 'post/' + `${title}` ,).pipe(
       map((res : responsePost) => {
         let comments = res.comments.map(x => {
           x = new responseComment(x.id,x.text,x.dateCreated,x.dateModified,x.postID,x.parentID,
@@ -56,6 +57,16 @@ export class BlogService {
           return x;
         });
         return new responsePost(res.id,res.title,res.authorID,comments,res.authorName);
+      }),
+      catchError(this.handleError),
+    );
+  }
+
+  public getUserProfile(username : string): Observable<userProfile>
+  {
+    return this.http.get<userProfile>(this.BASE_URL + 'profile/' + `${username}` ,).pipe(
+      map((res : userProfile) => {
+        return new userProfile(res.id,res.userName,res.name,res.surname,res.about,res.followers,res.followeds,res.dateCreated);
       }),
       catchError(this.handleError),
     );

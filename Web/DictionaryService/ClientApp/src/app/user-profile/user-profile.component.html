@@ -8,7 +8,8 @@
 </div>
 <p *ngIf="!showError && profileLoaded">
   User Name : {{user?.userName}},
-  User Email : {{user?.email}}
+  Follower Count : {{user?.followers!.length}}
+  Followed Count : {{user?.followeds!.length}}
 </p>
 <div *ngFor="let err of responseErrors">
   <div>{{ err }}</div>

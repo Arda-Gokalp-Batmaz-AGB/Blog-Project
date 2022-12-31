@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { responseUser } from '../models/responseUser';
 import { UserService } from '../services/user.service';
+import { BlogService } from '../services/blog.service';
+import { userProfile } from '../models/userProfile';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,11 +12,11 @@ import { UserService } from '../services/user.service';
 })
 export class UserProfileComponent implements OnInit {
   username : string = "";
-  user?: responseUser;
+  user?: userProfile;
   showError : boolean = false;
   responseErrors? : string[];
   profileLoaded : boolean = false;
-  constructor(private _activatedRoute: ActivatedRoute,private userService : UserService) {
+  constructor(private _activatedRoute: ActivatedRoute,private blogService : BlogService) {
     _activatedRoute.params.subscribe(params => {
       this.username = (params['username']);
       this.findUser();
@@ -29,8 +31,8 @@ export class UserProfileComponent implements OnInit {
   }
   findUser()
   {
-    this.userService
-      .getUser(this.username)
+    this.blogService
+      .getUserProfile(this.username)
       .subscribe({
         complete: () => {
           console.log('User taken sucessfully!');
