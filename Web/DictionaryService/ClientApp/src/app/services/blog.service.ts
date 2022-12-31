@@ -12,6 +12,7 @@ import { createPost } from "../models/createPost";
 import { createComment } from "../models/createComment";
 import { interaction } from "../models/interaction";
 import { userProfile } from "../models/userProfile";
+import { follow } from "../models/follow";
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +72,7 @@ export class BlogService {
       catchError(this.handleError),
     );
   }
+
   public createPost(authorID:string, title : string, text : string) : Observable<string>
   {
     const comment : createComment =
@@ -106,6 +108,18 @@ export class BlogService {
             x.authorID,x.authorName,x.likeCount,x.dislikeCount)
         return comment;
       }),
+      catchError(this.handleError),
+      shareReplay()
+    );
+  }
+
+  public followUnfollow(follower : string,followed : string)
+  {
+    const body : follow ={
+      followerUserName: follower,
+      followedUserName: followed
+    }
+    return this.http.post<userProfile>(this.BASE_URL + "Follow",body).pipe(
       catchError(this.handleError),
       shareReplay()
     );

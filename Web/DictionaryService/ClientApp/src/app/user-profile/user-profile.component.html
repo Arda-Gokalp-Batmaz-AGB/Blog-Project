@@ -6,11 +6,17 @@
   >
   <span class="visually-hidden">Loading...</span>
 </div>
-<p *ngIf="!showError && profileLoaded">
+<div  *ngIf="!showError && profileLoaded">
+<p>
   User Name : {{user?.userName}},
   Follower Count : {{user?.followers!.length}}
   Followed Count : {{user?.followeds!.length}}
 </p>
+<div *ngIf = "anotherProfile()">
+  <button *ngIf="!checkIfFollows()" (click)="switchFollow()">Follow</button>
+  <button *ngIf="checkIfFollows()" (click)="switchFollow()">Following</button>
+</div>
+</div>
 <div *ngFor="let err of responseErrors">
   <div>{{ err }}</div>
 </div>
