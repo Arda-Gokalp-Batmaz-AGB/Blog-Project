@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
   @Input() post! : responsePost
   interactionCount = 0;
   ngOnInit(): void {
+    this.getInteractionCount();
   }
 
   updatePost(type : string) : void
@@ -33,6 +34,7 @@ export class PostComponent implements OnInit {
 
       this.post.comments[0].likeCount = x.likeCount;
       this.post.comments[0].dislikeCount =  x.dislikeCount;
+      this.getInteractionCount();
     },
     error: (err) => {
       console.log('Error in interaction');
@@ -44,5 +46,14 @@ export class PostComponent implements OnInit {
   interactionPost(interecactionType : string) : void
   {
     this.updatePost(interecactionType);
+  }
+
+  getInteractionCount()
+  {
+    this.interactionCount = this.post.comments.length - 1;
+    this.post.comments.forEach((comment) =>{
+      const likeDislikeCount = comment.likeCount + comment.dislikeCount
+      this.interactionCount += likeDislikeCount
+    })
   }
 }
