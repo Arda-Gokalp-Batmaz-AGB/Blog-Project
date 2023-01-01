@@ -48,12 +48,21 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512"><path d="M160 80c0-26.5 21.5-48 48-48h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V80zM0 272c0-26.5 21.5-48 48-48H80c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V272zM368 96h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H368c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48z"/></svg>
                 {{interactionCount}}
               </div>
+              <div class="comment list-inline-item g-mr-20"  (click)="switchCommentSection()">
+                <li class="list-inline-item g-mr-20">
+                  <button class="comment like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></button>
+                </li>
+              </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-
+<div *ngIf="commentSection">
+  <app-createcomment (commentEventEmitter)="addNewComment($event)"
+    [postID]="post!.id" [parentID]="post!.comments[0].id">
+  </app-createcomment>
+</div>
 <div class = "comments">
   <h6>Comments :</h6>
   <div *ngFor="let comment of post!.comments?.slice(1)">

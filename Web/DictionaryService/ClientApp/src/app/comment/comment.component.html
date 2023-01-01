@@ -8,7 +8,7 @@
                 <span class="g-color-gray-dark-v4 g-font-size-12"><a routerLink="/profile/{{comment!.authorName}}" class = "postDirection"><h6>{{comment!.authorName}}</h6></a></span>
               </div>
               <div *ngIf = "minimizedComment == true && comment.parentID == -1" class="g-mb-15">
-                <span class="g-color-gray-dark-v4 g-font-size-12"><a routerLink="/post/{{comment!.postTitle}}" class = "postDirection"><h6>{{comment!.postTitle}}</h6></a></span>
+                <span class="g-color-gray-dark-v4 g-font-size-12"><a routerLink="/post/{{comment!.postTitle}}" class = "postDirection"><h5>{{comment!.postTitle}}</h5></a></span>
               </div>
               <p class="split-text">
                 <a *ngIf = "minimizedComment" routerLink="/post/{{comment.postTitle}}" class = "postDirection">{{comment.text}}</a>

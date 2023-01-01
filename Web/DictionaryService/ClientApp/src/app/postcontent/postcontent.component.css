@@ -65,5 +65,10 @@ body{
 }
 .split-text {
   word-break: break-all;
-  width: 800px;
+  width: auto;
+}
+.comment{
+  float: right;
+  border: none;
+  background: none;
 }

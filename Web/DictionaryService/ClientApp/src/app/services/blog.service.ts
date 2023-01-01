@@ -107,7 +107,20 @@ export class BlogService {
       shareReplay()
     );
   }
-
+  public createComment(authorID:string, postID : number, parentID : number, text : string) : Observable<responseComment>
+  {
+    const comment : createComment =
+    {
+      Text: text,
+      PostID: postID,
+      ParentID: parentID,
+      AuthorID: authorID
+    }
+    return this.http.post<responseComment>(this.BASE_URL + "CreateComment",comment,).pipe(
+      catchError(this.handleError),
+      shareReplay()
+    );
+  }
   public interactComment(commentID : number, interactionType : string, userID : string)
   {
     const interactionBody : interaction =

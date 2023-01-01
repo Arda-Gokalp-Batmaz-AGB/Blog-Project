@@ -5,7 +5,7 @@ import { BlogService } from '../services/blog.service';
 import { UserService } from '../services/user.service';
 import { responseUser } from '../models/responseUser';
 import { responseComment } from '../models/responseComment';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-postcontent',
   templateUrl: './postcontent.component.html',
@@ -19,8 +19,9 @@ export class PostcontentComponent implements OnInit {
   postLoaded : boolean = false;
   currentUser? : responseUser | null
   interactionCount = 0;
+  commentSection : boolean = false;
   constructor(private _activatedRoute: ActivatedRoute,
-    private blogService : BlogService,private userService : UserService) {
+    private blogService : BlogService,private userService : UserService,private toaster:ToastrService) {
     _activatedRoute.params.subscribe(params => {
       this.postTitle = (params['title']);
       this.findPost();
@@ -86,5 +87,19 @@ export class PostcontentComponent implements OnInit {
       const likeDislikeCount = comment.likeCount + comment.dislikeCount
       this.interactionCount += likeDislikeCount
     })
+  }
+
+  switchCommentSection()
+  {
+    this.commentSection = !this.commentSection;
+  }
+  addNewComment(comment : responseComment)
+  {
+    this.post?.comments.push(comment);
+    this.switchCommentSection();
+    this.toaster.success('You sucessfully added your comment!', 'Comment Added');
+  }
+  createPostComment()
+  {
   }
 }
