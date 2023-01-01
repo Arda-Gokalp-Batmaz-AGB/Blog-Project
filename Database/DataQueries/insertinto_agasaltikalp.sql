@@ -1,0 +1,163 @@
+INSERT INTO "User"("Id","Name", "SurName", "Email", "UserName", "PasswordHash")
+VALUES ('1415926535','Pedro','Afonso','Afonsop@hotmail.com','Afonsop','s7etKRoKn0Dokhs2RXAM'),
+('8979323846','Maria','Anders','Andersm@hotmail.com','Andersm','UVmm8ycnxmybziiL1WGG'),
+('2643383279','Ana','Trujillo','Trujilloa@hotmail.com','Trujilloa','45NWrTtjJ3PpKHhNxj0d'),
+('5028841971','Antonio','Moreno','Morenoa@hotmail.com','Morenoa','0HZPL4KgW9HY5iXQKhaG'),
+('6939937510','Thomas','Hardy','Hardyt@hotmail.com','Hardyt','8BHRW3RRXTaWrJxFJ5U1'),
+('5820974944','Christina','Berglund','Berglundc@hotmail.com','Berglundc','9BLp9PoMijVGhM9xb99X'),
+('5923078164','Hanna','Moos','Moosh@hotmail.com','Moosh','7QuUyh8gdhbc3CeaHGHR'),
+('0628620899','Frédérique','Citeaux','Citeauxf@hotmail.com','Citeauxf','Dh945ot1mi06mLUX4wVL'),
+('8628034825','Martín','Sommer','Sommerm@hotmail.com','Sommerm','oZ0Camu9y5cehp3QK6Tn'),
+('3421170679','Laurence','Lebihans','Lebihansl@hotmail.com','Lebihansl','v1VCqNKMFtUvmjqe3Ant'),
+('8214808651','Elizabeth','Lincoln','Lincolne@hotmail.com','Lincolne','3tNW38sHFbCnEGCumxnQ'),
+('3282306647','Victoria','Ashworth','Ashworthv@hotmail.com','Ashworthv','Vuo83XFvtJ1U3PjrANVy'),
+('0938446095','Patricio','Simpson','Simpsonp@hotmail.com','Simpsonp','eev065ifezzoEqmsNrcH'),
+('5058223172','Francisco','Chang','Changf@hotmail.com','Changf','d5VFLfdG6zziJD930Gbg'),
+('5359408128','Yang','Wang','Wangy@hotmail.com','Wangy','9YEhTmaRvf7TThMiiAX2'),
+('4811174502','Elizabeth','Brown','Browne@hotmail.com','Browne','PR2uEefX2vRkxxE0X9gH');
+
+
+update "User"
+set "Id"='M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc' where name='Pedro';
+update "User"
+set "Id"='7Nr3EYBu-5LVY-XHEp-aVY0-yCuu8NAqFjy5' where name='Maria';
+update "User"
+set "Id"='NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2' where name='Ana';
+update "User"
+set "Id"='dA6fJyg9-HBAf-9YWq-RpGy-KzCckMhodEW3' where name='Antonio';
+update "User"
+set "Id"='maHkKw9r-B9mM-NJbs-b3Jv-2MLYh7G6jaUb' where name='Thomas';
+update "User"
+set "Id"='KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt5uQ6' where name='Christina';
+update "User"
+set "Id"='TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ' where name='Hanna';
+update "User"
+set "Id"='jdZWca8o-62LC-Rkri-MJuF-LkE5NVNfGpio' where name='Frédérique';
+update "User"
+set "Id"='FKRRyFGK-LXx8-ZJZu-YAAG-LidT7r9w1qt4' where name='Laurence';
+update "User"
+set "Id"='RWPh8nhX-o4qi-3jiv-4uT9-4Ysjy8F5zVwr' where name='Elizabeth';
+update "User"
+set "Id"='u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72' where name='Victoria';
+update "User"
+set "Id"='94F58rZj-s0nd-2zrn-MXAs-J86gWPyDo5N7' where name='Patricio';
+update "User"
+set "Id"='6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV' where name='Francisco';
+update "User"
+set "Id"='TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN' where name='Yang';
+ 
+
+INSERT INTO "Follow"("FollowerID","FollowedID")
+VALUES ('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt5uQ6'),
+('7Nr3EYBu-5LVY-XHEp-aVY0-yCuu8NAqFjy5','TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN'),
+('NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2','1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K'),
+('dA6fJyg9-HBAf-9YWq-RpGy-KzCckMhodEW3','nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP'),
+('maHkKw9r-B9mM-NJbs-b3Jv-2MLYh7G6jaUb','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+('KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt5uQ6','TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ'),
+('TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+('jdZWca8o-62LC-Rkri-MJuF-LkE5NVNfGpio','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+('FKRRyFGK-LXx8-ZJZu-YAAG-LidT7r9w1qt4','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+('RWPh8nhX-o4qi-3jiv-4uT9-4Ysjy8F5zVwr','7Nr3EYBu-5LVY-XHEp-aVY0-yCuu8NAqFjy5'),
+('u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+('94F58rZj-s0nd-2zrn-MXAs-J86gWPyDo5N7','FKRRyFGK-LXx8-ZJZu-YAAG-LidT7r9w1qt4'),
+('6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV','TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ'),
+('TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN','KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt5uQ6'),
+('nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+('1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K','nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP');
+
+
+
+
+INSERT INTO "Post"("ID","Title","AuthorID")
+VALUES (‘9avdTPPigWqbsaqvt9’'The Martin Luther King, Jr. Guide to Inspirational Writing','M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc'),
+('acoJXDsGJuHcj9gzVU','Bored With Your Blog? These 10 Tips Will Make You Fall In Love Again','7Nr3EYBu-5LVY-XHEp-aVY0-yCuu8NAqFjy5'),
+('wDD7KqE8UWhQYHVKYb','The Martin Luther King, Jr. Guide to Inspirational Writing','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+('SMKkSYY6sMG9DJSaKJ','How To Use Canva: An 8-Step Guide To Creating Visual Content','dA6fJyg9-HBAf-9YWq-RpGy-KzCckMhodEW3'),
+('X3ag3s65X5da7AtTfi','The 17 Best Tools For Spying On Your Competition','maHkKw9r-B9mM-NJbs-b3Jv-2MLYh7G6jaUb'),
+('crzP4MVuvazqpUCay6','16 Knockout Article Ideas: How to Write Regularly for Your Blog','KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt5uQ6'),
+('f8RZbVqLouT8ESycSP','5 Things No One Will Tell You About Your First Job','KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt5uQ6'),
+('BmtaiUhdeNmFgEP3RF','How To Get More Likes On Facebook Without Buying Fans','TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ'),
+('H4jzMxGBjFydjRdajQ', 'Why Successful People Plan Their Lives 90 Days At A Time','jdZWca8o-62LC-Rkri-MJuF-LkE5NVNfGpio'),
+('ZaV7dLt2PK7KeToDi2','Infographic: The Best Careers For Introverts And Extroverts','jdZWca8o-62LC-Rkri-MJuF-LkE5NVNfGpio'),
+('3A9EK7g3aAgkAZkMbP','How To Create The Perfect Thank You Page: An Epic Guide','FKRRyFGK-LXx8-ZJZu-YAAG-LidT7r9w1qt4'),
+('ApspF46HFudoLoPZMB','6 Things No One Tells You About Running a Business While Traveling Full Time','nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP'),
+('TxG5Q56hVkN3yrFZAF', 'What is Amazon KDP Publishing? (And How to Start)','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+('YZb5AFELifFTa5nCZd','Email Marketing and Why it’s So Important [Infographic]','TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN'),
+('ojb4MBUhm3NYxXUzPA','Want New Customers Faster? Avoid This Rookie Marketing Habit','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+('8Gwj4ZrL8hL5yEwAw5','10 Mistakes I Made as a Successful First Time Kindle Author (So You Don’t Have To)','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV');
+
+
+INSERT INTO "Block"("BlockerID","BlockedID")
+VALUES ('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt5uQ6'),
+('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN'),
+('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K'),
+('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP'),
+('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ'),
+('TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ','M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc'),
+('jdZWca8o-62LC-Rkri-MJuF-LkE5NVNfGpio','M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc'),
+('FKRRyFGK-LXx8-ZJZu-YAAG-LidT7r9w1qt4','M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc'),
+('RWPh8nhX-o4qi-3jiv-4uT9-4Ysjy8F5zVwr','M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc'),
+('u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+('u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72','FKRRyFGK-LXx8-ZJZu-YAAG-LidT7r9w1qt4'),
+('u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72','TqRxQchj-RviN-ZXKj-1W2k-Lp383BcWE9kJ'),
+('TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+('nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+('1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72');
+
+
+
+INSERT INTO "Category"("Title")
+VALUES 
+	('Business'),
+	('Creativity'),
+	('Culture'),
+	('Entrepreneurship'),
+	('Leadership'),
+	('Productivity'),
+	('Work'),
+	('Marketing'),
+	('Technology'),
+	('Design'),
+	('Personal Growth'),
+	('Self Improvement'),
+	('Writing'),
+	('Education'),
+	('Science'),
+	('Health'),
+	('Social Science'),
+	('Politics'),
+	('Society'),
+	('Religion');
+
+
+
+INSERT INTO "Comment"("ID","Text","UpdateDate","PostID", "ParentID", "AuthorID")
+VALUES 
+        ('z36CNarBkcVqmJbK5c','great','10/12/2022','9avdTPPigWqbsaqvt9','z36CNarBkcVqmJbK5c','nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP'),
+        ('txCbXE99HbYvdqE7y2','great','10/12/2022','SMKkSYY6sMG9DJSaKJ','txCbXE99HbYvdqE7y2','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+        ('WVRRdrRaP9bHhAtEhi','great','10/12/2022','f8RZbVqLouT8ESycSP','WVRRdrRaP9bHhAtEhi','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+        ('Y9EPoFoSjefoNjyphx','great','10/12/2022','BmtaiUhdeNmFgEP3RF','Y9EPoFoSjefoNjyphx','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+        ('n4YzorFkiZUEBGAK8V','great','11/12/2022','YZb5AFELifFTa5nCZd','n4YzorFkiZUEBGAK8V','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+        ('yVzgi2gacQ9fw3XNZh','great','11/12/2022','YZb5AFELifFTa5nCZd','yVzgi2gacQ9fw3XNZh','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+        ('ByadKaCyqpDU5tqRj5','great','13/12/2022','YZb5AFELifFTa5nCZd','ByadKaCyqpDU5tqRj5','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+        ('kaHaDuSGWbDT6MjkbF','great','17/12/2022','8Gwj4ZrL8hL5yEwAw5','kaHaDuSGWbDT6MjkbF','1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K');
+        
+update "Comment"
+set "Text" = 'Great article, and helpful. It would appear that as were evolving.' where "ID" = 'txCbXE99HbYvdqE7y2';
+update "Comment"
+set "Text" = 'The way he delivered those words made all the difference.' where "ID" = 'WVRRdrRaP9bHhAtEhi';
+update "Comment"
+set "Text" = 'Thanks for the quick tip!' where "ID" = 'kaHaDuSGWbDT6MjkbF';
+update "Comment"
+set "Text" = 'Looks to be another good viral grammar post from Copyblogger!' where "ID" = 'Y9EPoFoSjefoNjyphx';
+update "Comment"
+set "Text" = 'Thank you so much for this very helpful post.
+You have put very useful words comparison.
+' where "ID" = 'n4YzorFkiZUEBGAK8V';
+update "Comment"
+set "Text" = 'Thanks for this Interesting article.' where "ID" = 'yVzgi2gacQ9fw3XNZh';
+update "Comment"
+set "Text" = 'Nice lil English lesson. Always a good refresher.' where "ID" = 'ByadKaCyqpDU5tqRj5';
+
+
