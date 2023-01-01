@@ -16,6 +16,7 @@ namespace DictionaryService.Services
 
         public CommentDTO InteractComment(AddInteractionToComment model);
         public List<CommentDTO> getUserComments(string userID);
+        public CommentDTO createCommentOnPost(AddUpdateCommentBindingModel model);
 
     }
 }

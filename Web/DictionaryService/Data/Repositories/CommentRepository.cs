@@ -272,7 +272,7 @@ namespace DictionaryService.Data.Repositories
             try
             {
                 cmd.CommandText = $"SELECT * FROM public.\"Comment\"" +
-                    $"WHERE \"AuthorID\" = @AuthorID LIMIT 5;";
+                    $"WHERE \"AuthorID\" = @AuthorID ORDER BY \"CreateDate\" DESC LIMIT 5;";
                 cmd.Parameters.AddWithValue("AuthorID", userID);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -336,6 +336,37 @@ namespace DictionaryService.Data.Repositories
                 reader.Close();
             }
             return title;
+        }
+
+        public CommentDTO createNewCommentOnPost(int postID, string authorID, int parentID, string text)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            int newID = -1;
+            try
+            {
+                cmd.CommandText = $"INSERT INTO public.\"Comment\"" +
+                    $"(\"Text\", \"CreateDate\", \"UpdateDate\", \"PostID\", \"AuthorID\",\"ParentID\")" +
+                    $"VALUES(@Text, @CreateDate, @UpdateDate, @PostID, @AuthorID,@ParentID) RETURNING \"ID\"";
+                cmd.Parameters.AddWithValue("Text", text);
+                cmd.Parameters.AddWithValue("CreateDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("UpdateDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("PostID", postID);
+                cmd.Parameters.AddWithValue("AuthorID", authorID);
+                cmd.Parameters.AddWithValue("ParentID", parentID);
+                newID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                //int identity = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+            return new CommentDTO(newID, text, DateTime.Now, DateTime.Now,
+            postID, parentID, authorID, GetAuthorById(authorID), 0,0, this.findCommentPostTitleByPostID(postID));
         }
     }
 }

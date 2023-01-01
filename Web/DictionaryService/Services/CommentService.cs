@@ -12,6 +12,16 @@ namespace DictionaryService.Services
             _repository = repository;
         }
 
+        public CommentDTO createCommentOnPost(AddUpdateCommentBindingModel model)
+        {
+            string authorID = model.AuthorID;
+            string text = model.Text;
+            int parentID = model.ParentID;
+            int postID = model.PostID;
+            var comment = _repository.createNewCommentOnPost(postID, authorID, parentID, text);
+            return comment;
+        }
+
         public void DeleteComment(int id)
         {
             throw new NotImplementedException();

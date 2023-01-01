@@ -72,5 +72,11 @@ namespace DictionaryService.Services
             var comments = _commentService.getUserComments(userID);
             return comments;
         }
+
+        public CommentDTO createComment(AddUpdateCommentBindingModel model)
+        {
+            var comment = _commentService.createCommentOnPost(model);
+            return comment;
+        }
     }
 }

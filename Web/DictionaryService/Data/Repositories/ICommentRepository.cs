@@ -19,5 +19,8 @@ namespace DictionaryService.Data.Repositories
         public List<CommentDTO> getUserComments(string userID);
 
         public string findCommentPostTitleByPostID(int postID);
+
+        public CommentDTO createNewCommentOnPost(int postID, string authorID, int parentID, string text);
+
     }
 }

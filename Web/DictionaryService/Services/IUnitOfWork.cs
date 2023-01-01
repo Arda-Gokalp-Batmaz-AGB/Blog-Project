@@ -16,5 +16,6 @@ namespace DictionaryService.Services
         public UserDTO GetUserProfile(string username);
         public UserDTO FollowUser(FollowBindingModel model);
         public List<CommentDTO> getUserComments(string userName);
+        public CommentDTO createComment(AddUpdateCommentBindingModel model);
     }
 }

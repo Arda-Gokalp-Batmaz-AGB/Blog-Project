@@ -113,5 +113,16 @@ namespace AuthorizationService.Controllers
             }
             return await Task.FromResult(Ok(foundedComments));
         }
+        [HttpPost("CreateComment")]
+        public async Task<IActionResult> CreateComment([FromBody] AddUpdateCommentBindingModel model)
+        {
+            var result = _service.createComment(model);
+            if (result != null)
+            {
+                return await Task.FromResult(Ok(result));
+            }
+
+            return await Task.FromResult(BadRequest());
+        }
     }
 }
