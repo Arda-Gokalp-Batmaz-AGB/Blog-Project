@@ -135,29 +135,49 @@ VALUES
 INSERT INTO "Comment"("ID","Text","UpdateDate","PostID", "ParentID", "AuthorID")
 VALUES 
         ('z36CNarBkcVqmJbK5c','great','10/12/2022','9avdTPPigWqbsaqvt9','z36CNarBkcVqmJbK5c','nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP'),
-        ('txCbXE99HbYvdqE7y2','great','10/12/2022','SMKkSYY6sMG9DJSaKJ','txCbXE99HbYvdqE7y2','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
-        ('WVRRdrRaP9bHhAtEhi','great','10/12/2022','f8RZbVqLouT8ESycSP','WVRRdrRaP9bHhAtEhi','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
-        ('Y9EPoFoSjefoNjyphx','great','10/12/2022','BmtaiUhdeNmFgEP3RF','Y9EPoFoSjefoNjyphx','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
-        ('n4YzorFkiZUEBGAK8V','great','11/12/2022','YZb5AFELifFTa5nCZd','n4YzorFkiZUEBGAK8V','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
-        ('yVzgi2gacQ9fw3XNZh','great','11/12/2022','YZb5AFELifFTa5nCZd','yVzgi2gacQ9fw3XNZh','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
-        ('ByadKaCyqpDU5tqRj5','great','13/12/2022','YZb5AFELifFTa5nCZd','ByadKaCyqpDU5tqRj5','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
-        ('kaHaDuSGWbDT6MjkbF','great','17/12/2022','8Gwj4ZrL8hL5yEwAw5','kaHaDuSGWbDT6MjkbF','1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K');
+        ('txCbXE99HbYvdqE7y2','Great article, and helpful. It would appear that as were evolving.','10/12/2022','SMKkSYY6sMG9DJSaKJ','txCbXE99HbYvdqE7y2','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+        ('WVRRdrRaP9bHhAtEhi','The way he delivered those words made all the difference.','10/12/2022','f8RZbVqLouT8ESycSP','WVRRdrRaP9bHhAtEhi','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+        ('Y9EPoFoSjefoNjyphx','Thanks for the quick tip!','10/12/2022','BmtaiUhdeNmFgEP3RF','Y9EPoFoSjefoNjyphx','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+        ('n4YzorFkiZUEBGAK8V','Looks to be another good viral grammar post from Copyblogger!','11/12/2022','YZb5AFELifFTa5nCZd','n4YzorFkiZUEBGAK8V','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+        ('yVzgi2gacQ9fw3XNZh','Thank you so much for this very helpful post.You have put very useful words comparison.','11/12/2022','YZb5AFELifFTa5nCZd','yVzgi2gacQ9fw3XNZh','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+        ('ByadKaCyqpDU5tqRj5','Thanks for this Interesting article.','13/12/2022','YZb5AFELifFTa5nCZd','ByadKaCyqpDU5tqRj5','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+        ('kaHaDuSGWbDT6MjkbF','Nice lil English lesson. Always a good refresher.','17/12/2022','8Gwj4ZrL8hL5yEwAw5','kaHaDuSGWbDT6MjkbF','1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K');
         
-update "Comment"
-set "Text" = 'Great article, and helpful. It would appear that as were evolving.' where "ID" = 'txCbXE99HbYvdqE7y2';
-update "Comment"
-set "Text" = 'The way he delivered those words made all the difference.' where "ID" = 'WVRRdrRaP9bHhAtEhi';
-update "Comment"
-set "Text" = 'Thanks for the quick tip!' where "ID" = 'kaHaDuSGWbDT6MjkbF';
-update "Comment"
-set "Text" = 'Looks to be another good viral grammar post from Copyblogger!' where "ID" = 'Y9EPoFoSjefoNjyphx';
-update "Comment"
-set "Text" = 'Thank you so much for this very helpful post.
-You have put very useful words comparison.
-' where "ID" = 'n4YzorFkiZUEBGAK8V';
-update "Comment"
-set "Text" = 'Thanks for this Interesting article.' where "ID" = 'yVzgi2gacQ9fw3XNZh';
-update "Comment"
-set "Text" = 'Nice lil English lesson. Always a good refresher.' where "ID" = 'ByadKaCyqpDU5tqRj5';
 
 
+
+INSERT INTO "Tag"("Name","ID")
+VALUES 
+	('Business','iqZP-WLLm-o8bW-GGckCQhoEwAP'),
+    ('Creativity','9G5o2-bRjG-t54K-yb0nGRG1Q30'),
+    ('Culture','h8t3-Qeja-03oY-KFuCvBMC0C3K'),
+    ('Entrepreneurship','96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+    ('Leadership','CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+    ('Productivity','1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+    ('Work','yuKd-96D9-zvNw-NjTq1RvmLaJV'),
+    ('Marketing','CNrp-QdJK-CQ88-ZAqYjmmsVG72'),
+	('Technology','VFTu-QdJK-G5F5-ZYjAqmmsVG72'),
+	('Design','CNrp-QdJK-CQ88-jmmsZAqYVG72'),
+	('Personal Growth','87hf-cvTH-yuKd-NjTq1RvmLaJV'),
+	('Self Improvement','76RH-zvNw-yuKd-NjTq1RvmLaJV'),
+	('Writing','IUvl-WLLm-o8bW-GGckCQhoEwAP'),
+	('Education','fk85-WLLm-o8bW-GGckCQhoEwAP'),
+	('Science','GDal-QdJK-CNrp-ZAqYjmmsVG72'),
+	('Health','JG8r-QdJK-CNrp-ZAqYjmmsVG72'),
+	('Social Science','95Hy-bRjG-t54K-yb0nGRG9G5o2'),
+	('Politics','5g8G-Tt54-KRw4-G9G5yb0nGRo2'),
+	('Society','8Drf-96D9-zvNw-NjTq1RvmLaJV'),
+	('Religion','oe8C-oi50-zvNw-RvmLaJVNjTq1');
+
+
+
+INSERT INTO "Comment_Tag"("CommentID","TagID")
+VALUES 
+        ('txCbXE99HbYvdqE7y2','9G5o2-bRjG-t54K-yb0nGRG1Q30'),
+        ('WVRRdrRaP9bHhAtEhi','h8t3-Qeja-03oY-KFuCvBMC0C3K'),
+        ('Y9EPoFoSjefoNjyphx','96D9-zvNw-yuKd-NjTq1RvmLaJV'),
+        ('n4YzorFkiZUEBGAK8V','CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
+        ('yVzgi2gacQ9fw3XNZh','1Q30-bRjG-t54K-yb0nGRG9G5o2'),
+        ('ByadKaCyqpDU5tqRj5','yuKd-96D9-zvNw-NjTq1RvmLaJV'),
+        ('kaHaDuSGWbDT6MjkbF','CNrp-QdJK-CQ88-ZAqYjmmsVG72'),    
+        ('z36CNarBkcVqmJbK5c','iqZP-WLLm-o8bW-GGckCQhoEwAP');
