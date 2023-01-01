@@ -15,6 +15,7 @@ export class CommentComponent implements OnInit {
 
   @Input() comment! : responseComment
   currentUser? : responseUser | null
+  @Input() minimizedComment : boolean = false;
   ngOnInit(): void {
   }
   updateComment(type : string) : void

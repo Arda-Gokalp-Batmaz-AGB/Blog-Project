@@ -36,7 +36,7 @@ export class BlogService {
           res.map((value) => {
             let comments = value.comments.map(x => {
               x = new responseComment(x.id,x.text,x.dateCreated,x.dateModified,x.postID,
-                x.parentID,x.authorID,x.authorName,x.likeCount,x.dislikeCount)
+                x.parentID,x.authorID,x.authorName,x.likeCount,x.dislikeCount,x.postTitle)
               return x;
             });
             postList.push(new responsePost(value.id,value.title,value.authorID,comments,value.authorName));
@@ -54,7 +54,7 @@ export class BlogService {
       map((res : responsePost) => {
         let comments = res.comments.map(x => {
           x = new responseComment(x.id,x.text,x.dateCreated,x.dateModified,x.postID,x.parentID,
-            x.authorID,x.authorName,x.likeCount,x.dislikeCount)
+            x.authorID,x.authorName,x.likeCount,x.dislikeCount,x.postTitle)
           return x;
         });
         return new responsePost(res.id,res.title,res.authorID,comments,res.authorName);
@@ -73,6 +73,20 @@ export class BlogService {
     );
   }
 
+  public getUserComments(username : string) : Observable<responseComment[]>
+  {
+    return this.http.get<responseComment[]>(this.BASE_URL + 'profile/' + `${username}` + '/activities' ,).pipe(
+      map((res : responseComment[]) => {
+        let comments = res.map(x => {
+            x = new responseComment(x.id,x.text,x.dateCreated,x.dateModified,x.postID,x.parentID,
+            x.authorID,x.authorName,x.likeCount,x.dislikeCount,x.postTitle)
+          return x;
+        });
+        return comments;
+      }),
+      catchError(this.handleError),
+    );
+  }
   public createPost(authorID:string, title : string, text : string) : Observable<string>
   {
     const comment : createComment =
@@ -105,7 +119,7 @@ export class BlogService {
     return this.http.post<responseComment>(this.BASE_URL + "InteractComment",interactionBody).pipe(
       map((x : responseComment) => {
           let comment = new responseComment(x.id,x.text,x.dateCreated,x.dateModified,x.postID,x.parentID,
-            x.authorID,x.authorName,x.likeCount,x.dislikeCount)
+            x.authorID,x.authorName,x.likeCount,x.dislikeCount,x.postTitle)
         return comment;
       }),
       catchError(this.handleError),

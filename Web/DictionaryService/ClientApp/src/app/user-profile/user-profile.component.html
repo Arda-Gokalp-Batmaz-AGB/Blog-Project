@@ -18,8 +18,13 @@
                   <div class="d-flex flex-row justify-content-center align-items-center mt-3">
                   <span class="number">{{user?.followeds!.length}} <span class="follow">Following</span></span>
                 </div> <div class=" d-flex mt-2">
+                  <div *ngIf="anotherProfile()">
                       <button class="btn1 btn-dark" *ngIf="!checkIfFollows()" (click)="switchFollow()">Follow</button>
                       <button class="btn1 btn-dark" *ngIf="checkIfFollows()" (click)="switchFollow()">Following</button>
+                  </div>
+                  <div *ngIf="!anotherProfile()">
+                    <button class="btn1 btn-dark" (click)="editProfile()">Edit Profile</button>
+                  </div>
                     </div>
                       <div class="text mt-3"> <span>{{user?.about}}</span> </div>
                           <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
@@ -27,8 +32,22 @@
                           </div>
         </div>
   </div>
-  <div class="lastCommentsPosts">Last Posts & Comments</div>
-</div>
-</div>
 
+
+
+
+
+
+
+</div>
+</div>
+<div class="lastCommentsPosts"><h3>Last Posts & Comments:</h3>
+
+  <div class = "comments">
+    <div *ngFor="let comment of userComments">
+      <app-comment [comment]="comment" [minimizedComment]="true"></app-comment>
+    </div>
+   </div>
+
+</div>
 </div>

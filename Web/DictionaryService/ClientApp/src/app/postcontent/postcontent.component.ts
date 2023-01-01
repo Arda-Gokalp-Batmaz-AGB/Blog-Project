@@ -18,6 +18,7 @@ export class PostcontentComponent implements OnInit {
   responseErrors? : string[];
   postLoaded : boolean = false;
   currentUser? : responseUser | null
+  interactionCount = 0;
   constructor(private _activatedRoute: ActivatedRoute,
     private blogService : BlogService,private userService : UserService) {
     _activatedRoute.params.subscribe(params => {
@@ -36,6 +37,7 @@ export class PostcontentComponent implements OnInit {
       complete: () => {
         console.log('Post taken sucessfully!');
         this.postLoaded = true;
+        this.getInteractionCount();
       }, // completeHandler
       error: (err) => {
         console.log('Error in getpost');
@@ -75,5 +77,14 @@ export class PostcontentComponent implements OnInit {
   interactionPost(interecactionType : string) : void
   {
     this.updatePost(interecactionType);
+  }
+
+  getInteractionCount()
+  {
+    this.interactionCount = this.post!.comments.length - 1;
+    this.post!.comments.forEach((comment) =>{
+      const likeDislikeCount = comment.likeCount + comment.dislikeCount
+      this.interactionCount += likeDislikeCount
+    })
   }
 }

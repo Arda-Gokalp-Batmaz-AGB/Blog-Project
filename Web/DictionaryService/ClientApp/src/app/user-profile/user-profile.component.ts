@@ -4,6 +4,7 @@ import { responseUser } from '../models/responseUser';
 import { UserService } from '../services/user.service';
 import { BlogService } from '../services/blog.service';
 import { userProfile } from '../models/userProfile';
+import { responseComment } from '../models/responseComment';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,17 +18,23 @@ export class UserProfileComponent implements OnInit {
   showError : boolean = false;
   responseErrors? : string[];
   profileLoaded : boolean = false;
+  userComments : responseComment[] = []
   constructor(private _activatedRoute: ActivatedRoute,private blogService : BlogService,private userService : UserService) {
     _activatedRoute.params.subscribe(params => {
       this.username = (params['username']);
       this.visitorUser = this.userService.currentUserValue;
       this.findUser();
+      this.getUserComments();
     });
   }
   ngOnInit(): void {
     this.showProfile();
   }
   showProfile()
+  {
+
+  }
+  editProfile()
   {
 
   }
@@ -103,6 +110,30 @@ export class UserProfileComponent implements OnInit {
           console.log(res);
         },
       });
+  }
+
+  getUserComments() : void
+  {
+    this.blogService
+    .getUserComments(this.username)
+    .subscribe({
+      complete: () => {
+        console.log('Comments taken sucessfully!');
+        this.profileLoaded = true;
+      }, // completeHandler
+      error: (err) => {
+        console.log('Error in get comments');
+        this.showError = true;
+        this.responseErrors = err;
+        this.profileLoaded = true;
+        console.log(err);
+      },
+      next: (res) => {
+        console.log('Response: ');
+        this.userComments = res;
+        console.log(res);
+      },
+    });
   }
 
 
