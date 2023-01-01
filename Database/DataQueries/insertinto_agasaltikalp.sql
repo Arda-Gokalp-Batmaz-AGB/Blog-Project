@@ -69,7 +69,7 @@ VALUES ('M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc','KwWDb28a-ZZwg-PsaM-GmDt-5dyt4Tbt
 
 
 INSERT INTO "Post"("ID","Title","AuthorID")
-VALUES (‘9avdTPPigWqbsaqvt9’'The Martin Luther King, Jr. Guide to Inspirational Writing','M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc'),
+VALUES ('9avdTPPigWqbsaqvt9','The Martin Luther King, Jr. Guide to Inspirational Writing','M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc'),
 ('acoJXDsGJuHcj9gzVU','Bored With Your Blog? These 10 Tips Will Make You Fall In Love Again','7Nr3EYBu-5LVY-XHEp-aVY0-yCuu8NAqFjy5'),
 ('wDD7KqE8UWhQYHVKYb','The Martin Luther King, Jr. Guide to Inspirational Writing','NGJ0K62s-1Q30-bRjG-t54K-yb0nGRG9G5o2'),
 ('SMKkSYY6sMG9DJSaKJ','How To Use Canva: An 8-Step Guide To Creating Visual Content','dA6fJyg9-HBAf-9YWq-RpGy-KzCckMhodEW3'),
@@ -82,9 +82,9 @@ VALUES (‘9avdTPPigWqbsaqvt9’'The Martin Luther King, Jr. Guide to Inspiratio
 ('3A9EK7g3aAgkAZkMbP','How To Create The Perfect Thank You Page: An Epic Guide','FKRRyFGK-LXx8-ZJZu-YAAG-LidT7r9w1qt4'),
 ('ApspF46HFudoLoPZMB','6 Things No One Tells You About Running a Business While Traveling Full Time','nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP'),
 ('TxG5Q56hVkN3yrFZAF', 'What is Amazon KDP Publishing? (And How to Start)','u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72'),
-('YZb5AFELifFTa5nCZd','Email Marketing and Why it’s So Important [Infographic]','TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN'),
+('YZb5AFELifFTa5nCZd','Email Marketing and Why it is So Important [Infographic]','TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN'),
 ('ojb4MBUhm3NYxXUzPA','Want New Customers Faster? Avoid This Rookie Marketing Habit','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV'),
-('8Gwj4ZrL8hL5yEwAw5','10 Mistakes I Made as a Successful First Time Kindle Author (So You Don’t Have To)','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV');
+('8Gwj4ZrL8hL5yEwAw5','10 Mistakes I Made as a Successful First Time Kindle Author (So You Do not Have To)','6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV');
 
 
 INSERT INTO "Block"("BlockerID","BlockedID")
