@@ -4,6 +4,7 @@ import { BlogService } from '../services/blog.service';
 import { UserService } from '../services/user.service';
 import { responseUser } from '../models/responseUser';
 import AWN from "awesome-notifications"
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-createpost',
   templateUrl: './createpost.component.html',
@@ -11,7 +12,7 @@ import AWN from "awesome-notifications"
 })
 export class CreatepostComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private blogService : BlogService,private userService : UserService) { }
+  constructor(private formBuilder: FormBuilder,private blogService : BlogService,private userService : UserService,private toaster:ToastrService) { }
 
   currentUser? : responseUser | null
   createPostForm: FormGroup | any;
@@ -38,8 +39,7 @@ export class CreatepostComponent implements OnInit {
         complete: () => {
           console.log('Post Created Sucessfully!');
           this.submitButton.nativeElement.disabled = false;
-          this.operationApproved = true;
-          this.blogService.redirectAfterCreatePost();
+          this.blogService.redirectAfterCreatePost(postContent.title);
         }, // completeHandler
         error: (err) => {
           console.log('Error in post creation');
@@ -47,8 +47,7 @@ export class CreatepostComponent implements OnInit {
           this.submitButton.nativeElement.disabled = false;
         },
         next: (res) => {
-          let notifier = new AWN()
-          new AWN().success("Post Created Sucessfully")
+          this.toaster.success('You have sucessfully added your Post!', 'Post Added');
 
         },
       });

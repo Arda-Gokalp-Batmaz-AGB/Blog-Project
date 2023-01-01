@@ -151,12 +151,12 @@ export class BlogService {
       shareReplay()
     );
   }
-  public redirectAfterCreatePost()
+  public redirectAfterCreatePost(title : string)
   {
     //this.router.navigateByUrl('/postlist' as string);
     setTimeout(() => {
-      this.router.navigate(['/postlist']);
-  }, 3000)
+      this.router.navigate(['/post/'+`${title}`]);
+  }, 1000)
   }
 
 

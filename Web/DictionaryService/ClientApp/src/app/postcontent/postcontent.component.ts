@@ -97,7 +97,7 @@ export class PostcontentComponent implements OnInit {
   {
     this.post?.comments.push(comment);
     this.switchCommentSection();
-    this.toaster.success('You sucessfully added your comment!', 'Comment Added');
+    this.toaster.success('You have sucessfully added your comment!', 'Comment Added');
   }
   createPostComment()
   {
