@@ -18,7 +18,10 @@ import { PostlistComponent } from './postlist/postlist.component';
 import { PostcontentComponent } from './postcontent/postcontent.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreatepostComponent } from './createpost/createpost.component';
+import { CreatecommentComponent } from './createcomment/createcomment.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +35,7 @@ import { CreatepostComponent } from './createpost/createpost.component';
     PostcontentComponent,
     CommentComponent,
     CreatepostComponent,
+    CreatecommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,9 +43,11 @@ import { CreatepostComponent } from './createpost/createpost.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   providers: [
-    {provide: ErrorHandler, useClass: GlobalErrorHandler},{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },{ provide: HTTP_INTERCEPTORS, useClass: ErrorCatchingInterceptor, multi: true }
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },{ provide: HTTP_INTERCEPTORS, useClass: ErrorCatchingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
