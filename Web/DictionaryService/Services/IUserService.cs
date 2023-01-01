@@ -7,5 +7,7 @@ namespace DictionaryService.Services
     {
         public UserDTO getUserProfile(string username);
         public UserDTO FollowUser(FollowBindingModel model);
+
+        public string findIDByUserName(string userName);
     }
 }

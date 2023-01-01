@@ -65,5 +65,12 @@ namespace DictionaryService.Services
             var user = _userService.FollowUser(model);
             return user;
         }
+
+        public List<CommentDTO> getUserComments(string userName)
+        {
+            string userID = _userService.findIDByUserName(userName);
+            var comments = _commentService.getUserComments(userID);
+            return comments;
+        }
     }
 }

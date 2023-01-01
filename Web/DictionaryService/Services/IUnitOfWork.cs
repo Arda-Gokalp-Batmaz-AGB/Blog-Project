@@ -14,7 +14,7 @@ namespace DictionaryService.Services
         public PostDTO GetPostByTitle(string postTitle);
         public CommentDTO InteractComment(AddInteractionToComment model);
         public UserDTO GetUserProfile(string username);
-
         public UserDTO FollowUser(FollowBindingModel model);
+        public List<CommentDTO> getUserComments(string userName);
     }
 }

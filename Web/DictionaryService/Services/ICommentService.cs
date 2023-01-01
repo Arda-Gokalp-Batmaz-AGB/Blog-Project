@@ -15,5 +15,7 @@ namespace DictionaryService.Services
         public void UpdateComment(CommentDTO updatedComment);
 
         public CommentDTO InteractComment(AddInteractionToComment model);
+        public List<CommentDTO> getUserComments(string userID);
+
     }
 }

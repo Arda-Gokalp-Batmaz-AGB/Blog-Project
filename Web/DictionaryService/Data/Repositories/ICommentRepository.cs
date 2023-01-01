@@ -16,5 +16,8 @@ namespace DictionaryService.Data.Repositories
         public CommentDTO InteractWithComment(AddInteractionToComment model);
         public void DeleteComment(int id);
         public void UpdateComment(CommentDTO updatedComment);
+        public List<CommentDTO> getUserComments(string userID);
+
+        public string findCommentPostTitleByPostID(int postID);
     }
 }

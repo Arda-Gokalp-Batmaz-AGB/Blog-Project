@@ -14,5 +14,6 @@ namespace DictionaryService.Data.Repositories
         public string findIdByUserName(string username);
 
         public bool FollowExists(string follower, string followed);
+
     }
 }

@@ -97,5 +97,21 @@ namespace AuthorizationService.Controllers
             }
             return await Task.FromResult(Ok(user));
         }
+
+        [HttpGet("profile/{user}/activities")]
+        public async Task<ActionResult<PostDTO>> GetUserActivities(string user)
+        {
+            var foundedComments= _service.getUserComments(user);
+            if (foundedComments == null)
+            {
+                return await Task.FromResult(NotFound(new CustomError()
+                {
+                    name = "Invalid user",
+                    status = "404",
+                    description = "There is not any comment associeated with this user"
+                }));
+            }
+            return await Task.FromResult(Ok(foundedComments));
+        }
     }
 }

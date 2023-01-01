@@ -12,6 +12,11 @@ namespace DictionaryService.Services
             _repository = repository;
         }
 
+        public string findIDByUserName(string userName)
+        {
+            return _repository.findIdByUserName(userName);
+        }
+
         public UserDTO FollowUser(FollowBindingModel model)
         {
             UserDTO user= null;

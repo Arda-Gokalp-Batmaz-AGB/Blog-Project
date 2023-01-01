@@ -44,6 +44,12 @@ namespace DictionaryService.Services
             return comments;
         }
 
+        public List<CommentDTO> getUserComments(string userID)
+        {
+            var comments = _repository.getUserComments(userID);
+            return comments;
+        }
+
         public Task<CommentDTO> InsertComment(AddUpdateCommentBindingModel model)
         {
             throw new NotImplementedException();

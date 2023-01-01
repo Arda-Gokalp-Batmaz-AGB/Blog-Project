@@ -77,6 +77,7 @@ namespace DictionaryService.Data.Repositories
                     DateTime create = DateTime.Parse(reader["CreateDate"].ToString());
                     DateTime update = DateTime.Parse(reader["UpdateDate"].ToString());
                     int PostID = Convert.ToInt32(reader["PostID"]);
+                    string PostTitle = this.findCommentPostTitleByPostID(PostID);
                     int ParentID = -1;
                     if (reader["ParentID"] != DBNull.Value)
                     {
@@ -86,7 +87,7 @@ namespace DictionaryService.Data.Repositories
                     int likeCount = GetInteractionCount("like", ID);
                     int dislikeCount = GetInteractionCount("dislike", ID);
                     comments.Add(new CommentDTO(ID,Text,create,update,postID, 
-                        ParentID,AuthorID, GetAuthorById(AuthorID), likeCount,dislikeCount));
+                        ParentID,AuthorID, GetAuthorById(AuthorID), likeCount,dislikeCount, PostTitle));
                 }
             }
             catch (Exception ex)
@@ -256,6 +257,85 @@ namespace DictionaryService.Data.Repositories
         public void UpdateComment(CommentDTO updatedComment)
         {
             throw new NotImplementedException();
+        }
+
+        public List<CommentDTO> getUserComments(string userID)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            List<CommentDTO> comments = new List<CommentDTO>();
+            int count = 0;
+            try
+            {
+                cmd.CommandText = $"SELECT * FROM public.\"Comment\"" +
+                    $"WHERE \"AuthorID\" = @AuthorID LIMIT 5;";
+                cmd.Parameters.AddWithValue("AuthorID", userID);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int ID = Convert.ToInt32(reader["ID"]);
+                    string Text = reader["Text"].ToString();
+                    DateTime create = DateTime.Parse(reader["CreateDate"].ToString());
+                    DateTime update = DateTime.Parse(reader["UpdateDate"].ToString());
+                    int PostID = Convert.ToInt32(reader["PostID"]);
+                    string PostTitle = this.findCommentPostTitleByPostID(PostID);
+                    int ParentID = -1;
+                    if (reader["ParentID"] != DBNull.Value)
+                    {
+                        ParentID = Convert.ToInt32(reader["ParentID"]);
+                    }
+                    string AuthorID = reader["AuthorID"].ToString();
+                    int likeCount = GetInteractionCount("like", ID);
+                    int dislikeCount = GetInteractionCount("dislike", ID);
+                    comments.Add(new CommentDTO(ID, Text, create, update, PostID,
+                        ParentID, AuthorID, GetAuthorById(AuthorID), likeCount, dislikeCount,PostTitle));
+                }
+            }
+            catch (Exception ex)
+            {
+                return comments;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return comments;
+        }
+
+        public string findCommentPostTitleByPostID(int postID)
+        {
+            using var con = new NpgsqlConnection(CS);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+            NpgsqlDataReader reader = null;
+            string title = "";
+            try
+            {
+                cmd.CommandText = $"SELECT \"Title\" FROM public.\"Post\" WHERE \"ID\" = @ID;";
+                cmd.Parameters.AddWithValue("ID", postID);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    title = reader["Title"].ToString();
+                    // string ID = reader["Id"].ToString();
+                    //string Text = reader["Text"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                reader.Close();
+            }
+            return title;
         }
     }
 }
