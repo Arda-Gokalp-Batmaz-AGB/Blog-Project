@@ -107,7 +107,7 @@ export class UserService {
   }
   public redirectAfterLogin()
   {
-    this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/home' as string);
+    this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/postlist' as string);
   }
   public get currentUserValue(): responseUser | null {
     return this.currentUserSubject.value;
