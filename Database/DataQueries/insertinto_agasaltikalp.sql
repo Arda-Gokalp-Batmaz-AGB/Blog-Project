@@ -205,6 +205,7 @@ VALUES
 		("TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN", 'YZb5AFELifFTa5nCZd');
 
 
+
 INSERT INTO "Interact"(CommentID, UserID, Type)
 VALUES 
 	   ('z36CNarBkcVqmJbK5c', 'nvqqT7qv-iqZP-WLLm-o8bW-GGckCQhoEwAP', 'positive'),
@@ -215,6 +216,7 @@ VALUES
        ('yVzgi2gacQ9fw3XNZh', 'u5oAmtTY-CQ88-QdJK-CNrp-ZAqYjmmsVG72', 'positive'),
        ('ByadKaCyqpDU5tqRj5', '6ebM1mmb-96D9-zvNw-yuKd-NjTq1RvmLaJV', 'positive'),
        ('kaHaDuSGWbDT6MjkbF', '1eU01QD7-h8t3-Qeja-03oY-KFuCvBMC0C3K', 'positive');
+
 
 
 INSERT INTO "Post_Category" (PostID, Category) 
@@ -236,3 +238,6 @@ VALUES
 		('ojb4MBUhm3NYxXUzPA', 'Marketing'),
 		('8Gwj4ZrL8hL5yEwAw5', 'Writing');
 
+Select pc.category, u.name, u.surname, p.title from post p join post_category pc on p.ID=pc.postID 
+                                                           join user u on p.authorID = u.ID 
+                                                           order by pc.category;
