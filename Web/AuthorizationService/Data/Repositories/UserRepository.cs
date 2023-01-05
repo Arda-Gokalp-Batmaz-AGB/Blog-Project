@@ -14,7 +14,7 @@ namespace AuthorizationService.Data.Repositories
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public void DeleteUser(int id)
+        public void DeleteUser(string id)
         {
             throw new NotImplementedException();
         }

@@ -36,7 +36,7 @@ export class UserService {
       shareReplay(),
       map((value : responseUser) => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        var user = new responseUser(value.userName,value.email,value.dateCreated,value.token);
+        var user = new responseUser(value.id,value.userName,value.email,value.dateCreated,value.token);
         if(body.RememberMe == true)
         {
           localStorage.setItem(constants.USER_KEY, JSON.stringify(user));
@@ -75,7 +75,7 @@ export class UserService {
         if(res)
         {
           res.map((value) => {
-            userList.push(new responseUser(value.userName,value.email,value.dateCreated,value.token));
+            userList.push(new responseUser(value.id,value.userName,value.email,value.dateCreated,value.token));
           })
         }
         return userList;
@@ -88,7 +88,7 @@ export class UserService {
   {
     return this.http.get<responseUser>(this.BASE_URL + `${username}` ,).pipe(
       map((res : responseUser) => {
-        return new responseUser(res.userName,res.email,res.dateCreated,res.token);
+        return new responseUser(res.id,res.userName,res.email,res.dateCreated,res.token);
       }),
       catchError(this.handleError),
     );
@@ -107,7 +107,7 @@ export class UserService {
   }
   public redirectAfterLogin()
   {
-    this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/home' as string);
+    this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/postlist' as string);
   }
   public get currentUserValue(): responseUser | null {
     return this.currentUserSubject.value;

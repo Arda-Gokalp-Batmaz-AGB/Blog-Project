@@ -53,21 +53,21 @@ namespace AuthorizationService.Controllers
             return await Task.FromResult(Ok(users));
         }
 
-        [HttpGet("{username}")]
-        public async Task<ActionResult<UserDTO>> GetUser(string username)
-        {
-            var user = await _service.GetUserAsync(username,"username");
-            if(user == null)
-            {
-                return await Task.FromResult(NotFound(new CustomError()
-                {
-                    name = "Invalid User",
-                    status = "404",
-                    description = "There is not any user with given name"
-                }));
-            }
-            return await Task.FromResult(Ok(user));
-        }
+        //[HttpGet("{username}")]
+        //public async Task<ActionResult<UserDTO>> GetUser(string username)
+        //{
+        //    var user = await _service.GetUserAsync(username,"username");
+        //    if(user == null)
+        //    {
+        //        return await Task.FromResult(NotFound(new CustomError()
+        //        {
+        //            name = "Invalid User",
+        //            status = "404",
+        //            description = "There is not any user with given name"
+        //        }));
+        //    }
+        //    return await Task.FromResult(Ok(user));
+        //}
         [HttpPost("Login")]
         public async Task<ActionResult<UserDTO>> Login([FromBody] LoginBindingModel model)
         {
