@@ -5,6 +5,7 @@ import { disableDebugTools } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,7 +13,7 @@ import { UserService } from '../services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router : Router,private userService : UserService,private formBuilder : FormBuilder) { }
+  constructor(private router : Router,private userService : UserService,private formBuilder : FormBuilder,private toaster:ToastrService) { }
   registerForm : FormGroup | any;
   emailIsValid?: boolean;
   userNameIsValid?: boolean;
@@ -75,11 +76,13 @@ export class RegisterComponent implements OnInit {
         this.submitButton.nativeElement.disabled = false;
         this.registrationInvalidResponse = false;
         this.responseErros = [];
-        this.router.navigate(["home"]);
+        this.toaster.success('You have sucessfully registered', 'Register');
+        this.router.navigate(["login"]);
       }, // completeHandler
       error: (err) =>
       {
         console.log("Error in Registration ");
+        this.toaster.error('A problem occured in registration', 'Register');
         console.log(err);
         this.responseErros = err;
         this.submitButton.nativeElement.disabled = false;

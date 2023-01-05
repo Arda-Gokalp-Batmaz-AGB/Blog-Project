@@ -1,4 +1,4 @@
-<h1>Dictionary App</h1>
+<h1>Blogging App</h1>
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
@@ -25,11 +25,14 @@
           <a class="nav-link" routerLink="register" *ngIf="!isUserLogin()">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="postlist">Posts</a>
+          <a class="nav-link" routerLink="newpost" *ngIf="isUserLogin()">New Post</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="usermanagement">UserManagement</a>
+          <a class="nav-link" routerLink="postlist">Posts</a>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="usermanagement">UserManagement</a>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" routerLink="login"  *ngIf="isUserLogin()" (click)="onLogout()">Logout</a>
         </li>

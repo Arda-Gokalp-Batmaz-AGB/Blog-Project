@@ -16,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { constants } from '../Helper/constants';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
+    private toaster:ToastrService,
   ) {}
   loginForm: FormGroup | any;
   userNameIsValid?: boolean;
@@ -91,6 +93,7 @@ export class LoginComponent implements OnInit {
           this.submitButton.nativeElement.disabled = false;
           this.authenticationInvalidResponse = false;
           //this.router.navigate(['home']);
+          this.toaster.success('You have sucessfully login', 'Login');
           this.userService.redirectAfterLogin();
           // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
           // this.router.navigateByUrl(this.returnUrl as string);
@@ -100,6 +103,7 @@ export class LoginComponent implements OnInit {
           console.log(err);
           this.authenticationInvalidResponse = true;
           this.submitButton.nativeElement.disabled = false;
+          this.toaster.error('A problem occured in login', 'Login');
         },
         next: (res) => {
           console.log('Response: ');

@@ -343,3 +343,5 @@ ASALocalRun/
 *.dll
 Web/DictionaryService/appsettings.json
 Web/DictionaryService/appsettings.json
+Web/AuthorizationService/appsettings.json
+Web/DictionaryService/Properties/launchSettings.json

@@ -13,7 +13,7 @@ namespace AuthorizationService.Data.Repositories
         public Task<AppUser> GetUserByEmailAsync(string email);
         public Task<SignInResult> SignInUserAsync(string username,string password);
         public Task<IdentityResult> InsertUserAsync(AddUpdateRegisterUserBindingModel model);
-        public void DeleteUser(int id);
+        public void DeleteUser(string id);
         public void UpdateUser(AppUser updateApp);
     }
 }

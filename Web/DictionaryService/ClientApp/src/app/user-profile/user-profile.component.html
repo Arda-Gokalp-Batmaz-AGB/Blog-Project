@@ -1,15 +1,53 @@
-<p>user-profile works!</p>
-<div
-  [hidden]="profileLoaded"
-  class="spinner-border"
-  role="status"
-  >
-  <span class="visually-hidden">Loading...</span>
-</div>
-<p *ngIf="!showError && profileLoaded">
-  User Name : {{user?.userName}},
-  User Email : {{user?.email}}
-</p>
 <div *ngFor="let err of responseErrors">
   <div>{{ err }}</div>
+</div>
+
+<div  *ngIf="!showError && profileLoaded">
+
+<div class="profile">
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+  <div class="card p-4">
+      <div class=" image d-flex flex-column justify-content-center align-items-center">
+          <button class="btn btn-secondary">
+          </button> <span class="name mt-3">{{user?.userName}}</span>
+          <span class="idd">@{{user?.userName}}</span>
+          <div class="d-flex flex-row justify-content-center align-items-center gap-2">
+               </div>
+              <div class="d-flex flex-row justify-content-center align-items-center mt-3">
+                  <span class="number"> {{user?.followers!.length}} <span class="follow">Followers</span></span></div>
+                  <div class="d-flex flex-row justify-content-center align-items-center mt-3">
+                  <span class="number">{{user?.followeds!.length}} <span class="follow">Following</span></span>
+                </div> <div class=" d-flex mt-2">
+                  <div *ngIf="anotherProfile()">
+                      <button class="btn1 btn-dark" *ngIf="!checkIfFollows()" (click)="switchFollow()">Follow</button>
+                      <button class="btn1 btn-dark" *ngIf="checkIfFollows()" (click)="switchFollow()">Following</button>
+                  </div>
+                  <div *ngIf="!anotherProfile()">
+                    <button class="btn1 btn-dark" (click)="editProfile()">Edit Profile</button>
+                  </div>
+                    </div>
+                      <div class="text mt-3"> <span>{{user?.about}}</span> </div>
+                          <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                                  <div class=" px-2 rounded mt-4 date "> <span class="join">Joined {{this.user!.dateCreated.slice(0,this.user!.dateCreated.indexOf('T'))}}</span> </div>
+                          </div>
+        </div>
+  </div>
+
+
+
+
+
+
+
+</div>
+</div>
+<div class="lastCommentsPosts"><h3>Last Posts & Comments:</h3>
+
+  <div class = "comments">
+    <div *ngFor="let comment of userComments">
+      <app-comment [comment]="comment" [minimizedComment]="true"></app-comment>
+    </div>
+   </div>
+
+</div>
 </div>
