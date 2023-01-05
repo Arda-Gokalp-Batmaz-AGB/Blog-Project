@@ -1,4 +1,4 @@
-Delete 
+ Delete 
 From "Block"
 Where BlockerID = 'M2unxVt7-ZRM7-rdUM-rq9g-dNeTbt5uQ6Bc' and BlockedID = 'TfVPAwMF-3mnU-DAPE-vFxC-MXAC3sXnrKKN';
 
