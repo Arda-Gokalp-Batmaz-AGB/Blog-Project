@@ -1,3 +1,5 @@
+
+
 -- Contact: Emir Cetin MEMIS & Emircan YAPRAK
 -- Date: 12/27/2022
 -- Note: The following queries that starts with "!!!" should be checked and fixed if needed. We are sure they should work, but not 100%.
