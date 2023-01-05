@@ -18,7 +18,7 @@ export class PostlistComponent implements OnInit {
   GetAllPosts() {
     this.blogService.getAllPosts().subscribe({
       next: (res) => {
-        this.posts = res;
+        this.posts = res.reverse();
         console.log(res);
       },
       error: (err) => {
