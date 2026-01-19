@@ -1,0 +1,35 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <app-post *ngFor="let currentPost of posts"
+      [post]="currentPost"></app-post>
+    </div>
+      <div class="col-sm-6">
+      </div>
+  </div>
+</div>
+
+
+    <!-- <app-post *ngFor="let currentPost of posts"
+    [post]="currentPost"></app-post> -->
+
+
+<!-- <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ post.title }}</td>
+      <td>{{ post.authorName }}</td>
+      <td>{{ post.comments[0].text }}</td>
+    </tr>
+  </tbody>
+</table> -->

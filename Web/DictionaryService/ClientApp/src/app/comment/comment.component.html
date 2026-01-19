@@ -1,0 +1,42 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<div class="container">
+<div class="row">
+    <div class="col-md-6">
+        <div class="media g-mb-30 media-comment">
+            <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+              <div *ngIf = "minimizedComment == false" class="g-mb-15">
+                <span class="g-color-gray-dark-v4 g-font-size-12"><a routerLink="/profile/{{comment!.authorName}}" class = "postDirection"><h6>{{comment!.authorName}}</h6></a></span>
+              </div>
+              <div *ngIf = "minimizedComment == true && comment.parentID == -1" class="g-mb-15">
+                <span class="g-color-gray-dark-v4 g-font-size-12"><a routerLink="/post/{{comment!.postTitle}}" class = "postDirection"><h5>{{comment!.postTitle}}</h5></a></span>
+              </div>
+              <p class="split-text">
+                <a *ngIf = "minimizedComment" routerLink="/post/{{comment.postTitle}}" class = "postDirection">{{comment.text}}</a>
+                <a *ngIf = "!minimizedComment" class = "postDirection">{{comment.text}}</a>
+              </p>
+
+              <ul class="list-inline d-sm-flex my-0">
+              <div class="like list-inline-item g-mr-20"  (click)="interactionComment('like')" >
+                <li class="list-inline-item g-mr-20">
+                  <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="javascript:void(0)">
+                    <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
+                    {{comment.likeCount}}
+                  </a>
+                </li>
+              </div>
+              <div class="dislike list-inline-item g-mr-20"  (click)="interactionComment('dislike')">
+                <li class="list-inline-item g-mr-20">
+                  <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="javascript:void(0)">
+                    <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
+                    {{comment.dislikeCount}}
+                  </a>
+                </li>
+              </div>
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- style="width: 50rem;" -->

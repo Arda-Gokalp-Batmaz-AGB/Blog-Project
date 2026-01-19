@@ -1,0 +1,165 @@
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+  integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+  crossorigin="anonymous"
+/>
+<div class="container h-100">
+  <div class="d-flex justify-content-center h-100">
+    <div class="user_card">
+      <div class="d-flex justify-content-center"></div>
+      <div class="d-flex justify-content-center form_container">
+        <form
+          class="loginform"
+          [formGroup]="registerForm"
+          (ngSubmit)="register(registerForm.value)"
+        >
+          <div class="input-group mb-3">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input
+              type="text"
+              name=""
+              class="form-control input_user"
+              formControlName="username"
+              placeholder="username"
+            />
+            <div *ngIf="userNameIsValid == false">
+              <div *ngIf="registerForm.get('username').hasError('required')">
+                Please Enter Username
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('username').errors?.minlength ||
+                  registerForm.get('username').errors?.maxlength
+                "
+              >
+                Username can be 5 to 20 characters
+              </div>
+              <div *ngIf="registerForm.get('username').hasError('pattern')">
+                Username can only contain letter and numbers
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input
+              type="text"
+              name=""
+              class="form-control input_user"
+              formControlName="email"
+              placeholder="Email"
+            />
+            <div *ngIf="emailIsValid == false">
+              <div *ngIf="registerForm.get('email').hasError('required')">
+                Please Enter Your Email
+              </div>
+              <div *ngIf="registerForm.get('email').hasError('pattern')">
+                Email Is not Valid
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input
+              type="password"
+              class="form-control input_pass"
+              formControlName="password"
+              placeholder="password"
+            />
+            <div *ngIf="passwordIsValid == false">
+              <div *ngIf="registerForm.get('password').hasError('required')">
+                Please Enter Password
+              </div>
+              <div *ngIf="registerForm.get('password').errors?.minlength">
+                Password length must be at least 6
+              </div>
+              <div
+                *ngIf="registerForm.controls['password'].hasError('hasNumber')"
+              >
+                Password must contain at least 1 number
+              </div>
+              <div
+                *ngIf="
+                  registerForm.controls['password'].hasError('hasCapitalCase')
+                "
+              >
+                Password must contain at least 1 uppercase letter
+              </div>
+              <div
+                *ngIf="
+                  registerForm.controls['password'].hasError('hasSmallCase')
+                "
+              >
+                Password must contain at least 1 lowercase letter
+              </div>
+              <div
+                *ngIf="
+                  registerForm.controls['password'].hasError(
+                    'hasSpecialCharacter'
+                  )
+                "
+              >
+                Password must contain at least 1 special character
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input
+              type="password"
+              class="form-control input_pass"
+              formControlName="passwordConfirm"
+              placeholder="password"
+            />
+            <div
+              *ngIf="
+                registerForm.controls['passwordConfirm'].touched &&
+                registerForm.controls['passwordConfirm'].hasError(
+                  'misMatchedPasswords'
+                )
+              "
+            >
+              Passwords are not matching
+            </div>
+          </div>
+          <div class="d-flex justify-content-center mt-3 login_container">
+            <button
+              type="button"
+              type="submit"
+              name="button"
+              class="btn login_btn submitbutton"
+              #submitButton
+            >
+              Register
+            </button>
+          </div>
+          <div
+            [hidden]="!submitButton.disabled"
+            class="spinner-border"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div *ngFor="let err of responseErros">
+            <div>{{ err }}</div>
+          </div>
+        </form>
+      </div>
+      <div class="mt-4"></div>
+    </div>
+  </div>
+</div>
